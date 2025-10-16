@@ -2,11 +2,33 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.FirstBoot.LoadingPage"
-             Title="LoadingPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#595BBC">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="30">
+
+        <!-- Title centered at top -->
+        <Label Grid.Row="0"
+               Text="Criteria."
+               FontFamily="Lateef"
+               FontSize="60"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center" />
+
+        <!-- Centered Loading Text in middle -->
+        <VerticalStackLayout Grid.Row="1"
+            HorizontalOptions="Center" 
+            VerticalOptions="Center"
+            Spacing="4">
+            <Label Text="Let's find you something to watch."
+                   FontSize="18"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
+            <Label Text="Please wait"
+                   FontSize="16"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+    </Grid>
 </ContentPage>

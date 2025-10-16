@@ -6,7 +6,7 @@
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Pages.FirstBoot.FilmSelectionPage());
+            MainPage = new NavigationPage(new Pages.FirstBoot.LoadingPage());
         }
     }
 }
