@@ -63,6 +63,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\FirstBoot\GenreSelection.xaml.cs">
+	    <DependentUpon>GenreSelection.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Pages\FirstBoot\FilmSelection.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -1,9 +1,11 @@
+
 namespace Criteria.Pages.FirstBoot;
 
-public partial class GenreSelection : ContentPage
+public partial class GenreSelectionPage : ContentPage
 {
-	public GenreSelection()
+	public GenreSelectionPage()
 	{
-		InitializeComponent();
+        InitializeComponent();
 	}
+
 }
