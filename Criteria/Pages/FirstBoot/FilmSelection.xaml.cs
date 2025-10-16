@@ -2,8 +2,10 @@ namespace Criteria.Pages.FirstBoot;
 
 public partial class FilmSelectionPage : ContentPage
 {
-	public FilmSelectionPage()
-	{
-		InitializeComponent();
-	}
+	private readonly List<string> _selectedGenres;
+    public FilmSelectionPage(List<string> selectedGenres)
+    {
+        InitializeComponent();
+        _selectedGenres = selectedGenres;
+    }
 }

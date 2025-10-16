@@ -36,32 +36,38 @@
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Comedy"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Drama"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Horror"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Romance"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Thriller"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
             </VerticalStackLayout>
 
             <!-- Right Column -->
@@ -70,37 +76,44 @@
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Fantasy"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Documentary"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Animation"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Mystery"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
                 <Button Text="Adventure"
                         BackgroundColor="#E0E0E0"
                         TextColor="Black"
                         CornerRadius="20"
-                        HeightRequest="45"/>
+                        HeightRequest="45"
+                        Clicked="OnGenreButtonClicked"/>
             </VerticalStackLayout>
         </Grid>
 
         <!-- Continue Button -->
         <Button Grid.Row="2"
+                x:Name="ContinueButton"
                 Text="Continue"
                 TextColor="Black"
                 FontAttributes="Bold"
@@ -110,6 +123,7 @@
                 HeightRequest="100"
                 Margin="0,30,0,0"
                 IsEnabled="False"
-                MaximumWidthRequest="300"/>
+                MaximumWidthRequest="300"
+                Clicked="OnContinueButtonClicked"/>
     </Grid>
 </ContentPage>
