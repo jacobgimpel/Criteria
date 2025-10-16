@@ -1,8 +1,8 @@
 namespace Criteria.Pages.FirstBoot;
 
-public partial class FilmSelection : ContentPage
+public partial class FilmSelectionPage : ContentPage
 {
-	public FilmSelection()
+	public FilmSelectionPage()
 	{
 		InitializeComponent();
 	}

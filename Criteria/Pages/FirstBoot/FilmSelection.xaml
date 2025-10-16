@@ -1,12 +1,59 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Criteria.Pages.FirstBoot.FilmSelection"
-             Title="FilmSelection">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="Criteria.Pages.FirstBoot.FilmSelectionPage"
+             BackgroundColor="#595BBC">
+    <Grid Padding="30">
+        <!--Title Selection and Searchbar-->
+        <VerticalStackLayout Grid.Row="0" Spacing="8" HorizontalOptions="Center">
+            <Label Text="Criteria."
+                   FontFamily="Lateef"
+                   FontSize="60"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
+            <Label Text="What are some of your favourite films?"
+                   FontSize="20"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,10"/>
+            <Label Text="Search for and select 10:"
+                   FontSize="15"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,10"/>
+            <Label Text="0/10 Selected"
+                   FontSize="20"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,10"/>
+            <SearchBar Placeholder="Search for a movie"
+                       BackgroundColor="Grey"/>
+        </VerticalStackLayout>
+        
+        <!--Add Button-->
+        <ImageButton
+            Source="plus_circle.png"
+            BackgroundColor="Transparent"
+            Margin="0, 650, 0, 0"
+            WidthRequest="80"
+            HeightRequest="80"
+            Scale="2"/>
+
+        <!--Continue Button-->
+        <Button Grid.Row="2"
+         Text="Continue"
+         TextColor="Black"
+         FontAttributes="Bold"
+         FontSize="30"
+         BackgroundColor="#E0E0E0"
+         CornerRadius="20"
+         HeightRequest="100"
+         Margin="0,800,0,0"
+         IsEnabled="False"
+         MaximumWidthRequest="300"/>
+
+    </Grid> 
 </ContentPage>
