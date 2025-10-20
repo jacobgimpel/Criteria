@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Criteria.Models;
 
 namespace Criteria.Services
@@ -16,21 +17,13 @@ namespace Criteria.Services
         public async Task<Movie?> SearchMovieAsync(string query)
         {
             using var client = new HttpClient();
-            var response = await client.GetStringAsync($"{BaseUrl}/search/movie?api_key={ApiKey}&query={Uri.EscapeDataString(query)}");
-            var json = JObject.Parse(response);
-            var movie = json["results"]?.FirstOrDefault();
+            var url = $"{BaseUrl}/search/movie?api_key={ApiKey}&query={Uri.EscapeDataString(query)}";
+            var response = await client.GetStringAsync(url);
 
-            if (movie != null)
-            {
-                return new Movie
-                {
-                    Title = movie["title"]?.ToString(),
-                    PosterPath = movie["poster_path"]?.ToString(),
-                    TMDBId = movie["id"]?.ToString()
-                };
-            }
+            var searchResult = JsonConvert.DeserializeObject<TMDBResponse>(response);
+            var firstMovie = searchResult?.results?.FirstOrDefault();
 
-            return null;
+            return firstMovie;
         }
     }
 }
