@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Criteria.Models;
 
 namespace Criteria.Services
@@ -21,9 +15,16 @@ namespace Criteria.Services
             var response = await client.GetStringAsync(url);
 
             var searchResult = JsonConvert.DeserializeObject<TMDBResponse>(response);
-            var firstMovie = searchResult?.results?.FirstOrDefault();
+            var firstMovie = searchResult?.Results?.FirstOrDefault();
 
-            return firstMovie;
+            if (firstMovie == null) return null;
+
+            return new Movie
+            {
+                Title = firstMovie.Title,
+                PosterPath = firstMovie.PosterPath,
+                TMDBId = firstMovie.Id.ToString()
+            };
         }
     }
 }

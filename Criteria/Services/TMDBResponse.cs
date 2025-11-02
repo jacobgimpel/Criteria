@@ -10,13 +10,14 @@ namespace Criteria.Services
 {
     class TMDBResponse
     {
-        public List<Movie>? results { get; set; }
+        [JsonProperty("results")]
+        public List<NewMovie>? Results { get; set; }
     }
 
     public class NewMovie
     {
         [JsonProperty("id")]
-        public string? TMDBid { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("title")]
         public string? Title { get; set; }
