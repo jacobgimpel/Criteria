@@ -2,7 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.FirstBoot.FilmSelectionPage"
              BackgroundColor="#595BBC">
-    <Grid Padding="30">
+
+    <!-- Define rows to organize layout properly -->
+    <Grid Padding="30" RowDefinitions="Auto, *, Auto, Auto">
+
         <!--Title Selection and Searchbar-->
         <VerticalStackLayout Grid.Row="0" Spacing="8" HorizontalOptions="Center">
             <Label Text="Criteria."
@@ -33,38 +36,37 @@
             <SearchBar x:Name="SearchBar"
                        Placeholder="Search for a movie"
                        BackgroundColor="Grey"/>
-            <ScrollView Orientation="Horizontal"
-                        HeightRequest="120"
-                        HorizontalScrollBarVisibility="Always"
-                        Margin="0, 10, 0, 10">
-                <HorizontalStackLayout x:Name="SelectedMoviesLayout" Spacing="10"/>
-            </ScrollView>
         </VerticalStackLayout>
-        
-        <!--Add Button-->
-        <ImageButton
-            Source="plus_circle.png"
-            BackgroundColor="Transparent"
-            Margin="0, 650, 0, 0"
-            WidthRequest="80"
-            HeightRequest="80"
-            Scale="2"
-            Clicked="OnAddButtonClicked"/>
 
-        <!--Continue Button-->
-        <Button x:Name="ContinueButton"
-         Grid.Row="2"
-         Text="Continue"
-         TextColor="Black"
-         FontAttributes="Bold"
-         FontSize="30"
-         BackgroundColor="#E0E0E0"
-         CornerRadius="20"
-         HeightRequest="100"
-         Margin="0,800,0,0"
-         IsEnabled="False"
-         MaximumWidthRequest="300"
-         Clicked="OnContinueButtonClicked"/>
+        <!-- Search results -->
+        <ScrollView Grid.Row="1" Orientation="Vertical" Margin="0,10,0,10">
+            <Grid x:Name="SearchResultsGrid" RowSpacing="10" ColumnSpacing="10"/>
+        </ScrollView>
 
-    </Grid> 
+        <!-- Selected movies -->
+        <ScrollView Grid.Row="2" Orientation="Horizontal" HeightRequest="120" HorizontalScrollBarVisibility="Always" Margin="0,10,0,10">
+            <HorizontalStackLayout x:Name="SelectedMoviesLayout" Spacing="10"/>
+        </ScrollView>
+
+        <!-- Add and Continue -->
+        <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center" Spacing="30">
+            <ImageButton Source="plus_circle.png"
+                         BackgroundColor="Transparent"
+                         WidthRequest="80"
+                         HeightRequest="80"
+                         Clicked="OnAddButtonClicked"/>
+            <Button x:Name="ContinueButton"
+                    Text="Continue"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    BackgroundColor="#E0E0E0"
+                    CornerRadius="20"
+                    HeightRequest="100"
+                    WidthRequest="250"
+                    IsEnabled="False"
+                    Clicked="OnContinueButtonClicked"/>
+        </HorizontalStackLayout>
+
+    </Grid>
 </ContentPage>

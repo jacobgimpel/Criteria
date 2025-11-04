@@ -5,74 +5,152 @@ namespace Criteria.Pages.FirstBoot;
 
 public partial class FilmSelectionPage : ContentPage
 {
-	private readonly List<string> _selectedGenres;
-    private readonly List<Movie> _selectedMovies = new();
     private readonly TMDBService _tmdbService = new();
-    public FilmSelectionPage(List<string> selectedGenres)
+    private readonly List<Movie> searchResults = new();
+    private Movie? _highlightedMovie;
+    private readonly List<Movie> _selectedMovies = new();
+    private readonly List<string> _selectedGenres = new();
+
+    public FilmSelectionPage()
     {
         InitializeComponent();
-        _selectedGenres = selectedGenres;
+        SearchBar.TextChanged += OnSearchTextChanged;
+    }
 
-        ContinueButton.IsEnabled = false;
-        ContinueButton.BackgroundColor = Colors.Gray;
-        CounterLabel.Text = $"0/10";
+    public FilmSelectionPage(List<string> selectedGenres) : this()
+    {
+        _selectedGenres = selectedGenres;
+    }
+
+    private async void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        string query = e.NewTextValue?.Trim() ?? "";
+        if (string.IsNullOrEmpty(query))
+            return;
+
+        await SearchAndDisplayMoviesAsync(query);
+    }
+
+    private async Task SearchAndDisplayMoviesAsync(string query)
+    {
+        searchResults.Clear();
+        SearchResultsGrid.Children.Clear();
+        SearchResultsGrid.RowDefinitions.Clear();
+        SearchResultsGrid.ColumnDefinitions.Clear();
+
+
+        for (int i = 0; i < 3; i++)
+            SearchResultsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+
+        var movieResults = await _tmdbService.SearchMovieAsync(query);
+
+        if (movieResults != null)
+        {
+    
+            searchResults.AddRange(movieResults.Take(5));
+        }
+
+        int row = 0, col = 0;
+        foreach (var result in searchResults)
+        {
+
+            if (string.IsNullOrEmpty(result.PosterPath))
+                continue;
+
+            var posterImage = new Image
+            {
+                Source = result.PosterPath,
+                Aspect = Aspect.AspectFill,
+                HeightRequest = 200,
+                WidthRequest = 150
+            };
+
+            var tapGesture = new TapGestureRecognizer();
+    
+            tapGesture.Tapped += (s, e) => OnMovieSelected(result, posterImage);
+            posterImage.GestureRecognizers.Add(tapGesture);
+
+   
+            if (SearchResultsGrid.RowDefinitions.Count <= row)
+                SearchResultsGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
+            Grid.SetColumn(posterImage, col);
+            Grid.SetRow(posterImage, row);
+            SearchResultsGrid.Children.Add(posterImage);
+
+            col++;
+            if (col >= 3)
+            {
+                col = 0;
+                row++;
+            }
+        }
+    }
+
+    private void OnMovieSelected(Movie movie, Image posterImage)
+    {
+        _highlightedMovie = movie;
+
+        foreach (var child in SearchResultsGrid.Children)
+            if (child is Image img)
+                img.Opacity = 1.0;
+
+        posterImage.Opacity = 0.5;
     }
 
     private async void OnAddButtonClicked(object sender, EventArgs e)
     {
-        var query = SearchBar.Text?.Trim();
-        if (string.IsNullOrEmpty(query))
-            return;
-        var movie = await _tmdbService.SearchMovieAsync(query);
-        if (movie == null)
+        if (_highlightedMovie == null)
         {
-            await DisplayAlert("Not Found", "Movie not found. Please try another title.", "OK");
+            await DisplayAlert("No Movie Selected", "Please select a movie to add.", "OK");
             return;
         }
-        if (_selectedMovies.Any(m => m.TMDBId == movie.TMDBId))
-        {
-            await DisplayAlert("Already Added", "This movie is already in your selection.", "OK");
-            return;
-        }
-        _selectedMovies.Add(movie);
-        AddMoviePoster(movie);
-        UpdateCounter();
-        UpdateContinueButton();
-    }
 
-    private void AddMoviePoster(Movie movie)
-    {
-        var image = new Image
+        if (_selectedMovies.Count >= 10)
         {
-            Source = $"https://image.tmdb.org/t/p/w200{movie.PosterPath}",
-            WidthRequest = 70,
+            await DisplayAlert("Limit Reached", "You can only add 10 movies.", "OK");
+            return;
+        }
+
+        if (_selectedMovies.Any(m => m.TMDBId == _highlightedMovie.TMDBId))
+        {
+            await DisplayAlert("Already Added", "This movie has already been added.", "OK");
+            return;
+        }
+
+        _selectedMovies.Add(_highlightedMovie);
+
+        var selectedPoster = new Image
+        {
+            Source = _highlightedMovie.PosterPath,
+            Aspect = Aspect.AspectFill,
             HeightRequest = 100,
+            WidthRequest = 75,
+            Margin = new Thickness(5)
         };
 
-        SelectedMoviesLayout.Children.Add(image);
-    }
-    private void UpdateCounter()
-    {
-        CounterLabel.Text = $"{_selectedMovies.Count}/10";
-    }
-    private void UpdateContinueButton()
-    {
-        if (_selectedMovies.Count == 10)
-        {
-            ContinueButton.IsEnabled = true;
-            ContinueButton.BackgroundColor = Colors.Blue;
-        }
-        else
-        {
-            ContinueButton.IsEnabled = false;
-            ContinueButton.BackgroundColor = Colors.Gray;
-        }
-    }
-    private async void OnContinueButtonClicked(object sender, EventArgs e)
-    {
-        if (_selectedMovies.Count != 10)
-            return;
-        await Navigation.PushAsync(new LoadingPage());
+        SelectedMoviesLayout.Children.Add(selectedPoster);
+
+        CounterLabel.Text = $"{_selectedMovies.Count}/10 Movies Selected";
+        ContinueButton.IsEnabled = _selectedMovies.Count == 10;
+        ContinueButton.BackgroundColor = ContinueButton.IsEnabled ? Colors.Purple : Colors.Gray;
+
+        foreach (var child in SearchResultsGrid.Children)
+            if (child is Image img)
+                img.Opacity = 1.0;
+
+        _highlightedMovie = null;
     }
 
+    private async void OnContinueButtonClicked(object sender, EventArgs e)
+    {
+        if (_selectedMovies.Count < 10)
+        {
+            await DisplayAlert("Too Few Movies", "Please select 10 movies to continue.", "OK");
+            return;
+        }
+
+        // Navigate to the next page (replace with your actual next page)
+        // await Navigation.PushAsync(new SomeNextPage(_selectedMovies));
+    }
 }
