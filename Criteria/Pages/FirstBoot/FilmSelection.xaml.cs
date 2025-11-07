@@ -149,8 +149,10 @@ public partial class FilmSelectionPage : ContentPage
             await DisplayAlert("Too Few Movies", "Please select 10 movies to continue.", "OK");
             return;
         }
+        if (_selectedMovies.Count == 10)
+        {
+            await Navigation.PushAsync(new Pages.FirstBoot.LoadingPage(_selectedGenres, _selectedMovies));
+        }
 
-        // Navigate to the next page (replace with your actual next page)
-        // await Navigation.PushAsync(new SomeNextPage(_selectedMovies));
     }
 }
