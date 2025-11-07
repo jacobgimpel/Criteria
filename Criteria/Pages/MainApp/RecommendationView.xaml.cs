@@ -2,7 +2,7 @@ namespace Criteria.Pages.MainApp;
 
 public partial class RecommendationView : ContentPage
 {
-	public RecommendationView()
+	public RecommendationView(object recommendedMovies)
 	{
 		InitializeComponent();
 	}

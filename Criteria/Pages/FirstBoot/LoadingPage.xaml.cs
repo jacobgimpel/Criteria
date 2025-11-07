@@ -1,4 +1,6 @@
-using Criteria.Models; 
+using Criteria.Models;
+using Newtonsoft.Json;
+using Microsoft.Maui.Storage;
 
 namespace Criteria.Pages.FirstBoot;
 
@@ -13,10 +15,23 @@ public partial class LoadingPage : ContentPage
         _selectedGenres = selectedGenres;
         _selectedMovies = selectedMovies;
 
+        SaveUserData();
+        LoadRecommendationsAsync();
     }
 
-    public LoadingPage()
+    private void SaveUserData()
     {
-        InitializeComponent();
+        Preferences.Set("HasCompletedFirstBoot", true);
+        Preferences.Set("SelectedGenres", JsonConvert.SerializeObject(_selectedGenres));
+        Preferences.Set("SelectedMovies", JsonConvert.SerializeObject(_selectedMovies));
+    }
+
+    private async void LoadRecommendationsAsync()
+    {
+        await Task.Delay(5000);
+
+        var recommendedMovies = _selectedMovies; // Placeholder for actual recommendation logic
+
+        Application.Current.MainPage = new NavigationPage(new Pages.MainApp.RecommendationView(recommendedMovies));
     }
 }
