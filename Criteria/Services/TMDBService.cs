@@ -9,7 +9,22 @@ namespace Criteria.Services
         private const string BaseUrl = "https://api.themoviedb.org/3";
         private const string ImageBaseUrl = "https://image.tmdb.org/t/p/w500";
 
-        public async Task<List<Movie>> SearchMovieAsync(string query)
+        private readonly Dictionary<string, string> GenreMapping = new()
+        {
+            {"Action", "28"},
+            {"Comedy", "35"},
+            {"Drama", "18" },
+            {"Horror", "27"},
+            {"Romance", "10749"},
+            {"Thriller", "53"},
+            {"Sci-fi", "878"},
+            {"Fantasy", "14"},
+            {"Documentary", "99"},
+            {"Animation", "16"},
+            {"Mystery", "9648"},
+            {"Adventure", "12"}
+        };
+public async Task<List<Movie>> SearchMovieAsync(string query)
         {
             using var client = new HttpClient();
             var url = $"{BaseUrl}/search/movie?api_key={ApiKey}&query={Uri.EscapeDataString(query)}";
