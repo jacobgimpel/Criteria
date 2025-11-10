@@ -16,7 +16,7 @@ public partial class LoadingPage : ContentPage
         _selectedMovies = selectedMovies;
 
         SaveUserData();
-        LoadRecommendationsAsync();
+        _=LoadRecommendationsAsync();
     }
 
     private void SaveUserData()
@@ -26,12 +26,10 @@ public partial class LoadingPage : ContentPage
         Preferences.Set("SelectedMovies", JsonConvert.SerializeObject(_selectedMovies));
     }
 
-    private async void LoadRecommendationsAsync()
+    private async Task LoadRecommendationsAsync()
     {
-        await Task.Delay(5000);
-
-        var recommendedMovies = _selectedMovies; // Placeholder for actual recommendation logic
-
+        var tmdbService = new Services.TMDBService();
+        var recommendedMovies = await tmdbService.GetRecommendationsAsync(_selectedMovies, _selectedGenres, 5);
         Application.Current.MainPage = new NavigationPage(new Pages.MainApp.RecommendationView(recommendedMovies));
     }
 }

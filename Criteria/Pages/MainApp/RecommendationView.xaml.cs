@@ -10,6 +10,8 @@ public partial class RecommendationView : ContentPage
     {
         InitializeComponent();
         _recommendedMovies = recommendedMovies;
+
+        RecommendationsCarousel.ItemsSource = _recommendedMovies;
     }
 
     private void OnPosterTapped(object sender, EventArgs e)
