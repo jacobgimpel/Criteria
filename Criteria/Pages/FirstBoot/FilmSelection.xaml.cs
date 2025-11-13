@@ -106,9 +106,9 @@ public partial class FilmSelectionPage : ContentPage
             return;
         }
 
-        if (_selectedMovies.Count >= 10)
+        if (_selectedMovies.Count >= 6)
         {
-            await DisplayAlert("Limit Reached", "You can only add 10 movies.", "OK");
+            await DisplayAlert("Limit Reached", "You can only add 6 movies.", "OK");
             return;
         }
 
@@ -131,8 +131,8 @@ public partial class FilmSelectionPage : ContentPage
 
         SelectedMoviesLayout.Children.Add(selectedPoster);
 
-        CounterLabel.Text = $"{_selectedMovies.Count}/10 Movies Selected";
-        ContinueButton.IsEnabled = _selectedMovies.Count == 10;
+        CounterLabel.Text = $"{_selectedMovies.Count}/6 Movies Selected";
+        ContinueButton.IsEnabled = _selectedMovies.Count == 6;
         ContinueButton.BackgroundColor = ContinueButton.IsEnabled ? Colors.Purple : Colors.Gray;
 
         foreach (var child in SearchResultsGrid.Children)
@@ -144,12 +144,12 @@ public partial class FilmSelectionPage : ContentPage
 
     private async void OnContinueButtonClicked(object sender, EventArgs e)
     {
-        if (_selectedMovies.Count < 10)
+        if (_selectedMovies.Count < 6)
         {
             await DisplayAlert("Too Few Movies", "Please select 10 movies to continue.", "OK");
             return;
         }
-        if (_selectedMovies.Count == 10)
+        if (_selectedMovies.Count == 6)
         {
             await Navigation.PushAsync(new Pages.FirstBoot.LoadingPage(_selectedGenres, _selectedMovies));
         }

@@ -20,14 +20,14 @@
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"
                    Margin="0,0,0,10"/>
-            <Label Text="Search for and select 10:"
+            <Label Text="Search for and select 6:"
                    FontSize="15"
                    TextColor="Black"
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"
                    Margin="0,0,0,10"/>
             <Label x:Name="CounterLabel"
-                   Text="0/10 Selected"
+                   Text="0/6 Selected"
                    FontSize="20"
                    TextColor="Black"
                    HorizontalOptions="Center"

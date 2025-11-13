@@ -11,5 +11,7 @@ namespace Criteria.Models
         public string? Title { get; set; }
         public string? PosterPath { get; set; }
         public string? TMDBId { get; set; }
+
+        public string? Overview { get; set; }
     }
 }
