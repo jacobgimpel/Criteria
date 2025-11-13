@@ -49,6 +49,22 @@
                             </Image.GestureRecognizers>
                         </Image>
                         
+                        <!-- Synopsis Overlay -->
+                        <Grid x:Name="Overlay"
+                              Background="Gray"
+                              IsVisible="False"
+                              Opacity="0"
+                              Padding="10"
+                              VerticalOptions="Fill"
+                              HorizontalOptions="Fill">
+                            <ScrollView>
+                                <Label Text="{Binding Overview}"
+                                       TextColor="White"
+                                       FontSize="14"
+                                       LineBreakMode="WordWrap"/>
+                            </ScrollView> 
+                        </Grid>
+                              
                         <!-- Movie Title -->
                         <Label Grid.Row="1"
                                Text="{Binding Title}"

@@ -43,7 +43,8 @@ namespace Criteria.Services
                     PosterPath = tmdbResult.PosterPath != null
                         ? ImageBaseUrl + tmdbResult.PosterPath
                         : null,
-                    TMDBId = tmdbResult.Id.ToString()
+                    TMDBId = tmdbResult.Id.ToString(),
+                    Overview = tmdbResult.Overview
                 })
                 .Where(m => !string.IsNullOrEmpty(m.PosterPath))
                 .ToList();
@@ -79,7 +80,8 @@ namespace Criteria.Services
                             {
                                 Title = result.Title,
                                 PosterPath = ImageBaseUrl + result.PosterPath,
-                                TMDBId = result.Id.ToString()
+                                TMDBId = result.Id.ToString(),
+                                Overview = result.Overview
                             });
                         }
                     }
@@ -112,7 +114,8 @@ namespace Criteria.Services
                             {
                                 Title = result.Title,
                                 PosterPath = ImageBaseUrl + result.PosterPath,
-                                TMDBId = result.Id.ToString()
+                                TMDBId = result.Id.ToString(),
+                                Overview = result.Overview
                             });
                         }
                     }

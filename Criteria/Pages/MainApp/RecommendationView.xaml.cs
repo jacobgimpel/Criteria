@@ -1,5 +1,6 @@
 using Criteria.Models;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 namespace Criteria.Pages.MainApp;
 
 public partial class RecommendationView : ContentPage
@@ -14,9 +15,25 @@ public partial class RecommendationView : ContentPage
         RecommendationsCarousel.ItemsSource = _recommendedMovies;
     }
 
-    private void OnPosterTapped(object sender, EventArgs e)
+    private async void OnPosterTapped(object sender, TappedEventArgs e)
     {
-        DisplayAlert("Great work for tapping a movie, awesome!", "Ok", "This is just a test");
+        if (sender is Image image && image.Parent is Grid grid)
+        {
+            var overlay = grid.FindByName<Grid>("Overlay");
+            if (overlay == null) 
+                return;
+
+            if (overlay.IsVisible)
+            {
+                await overlay.FadeTo(0, 250);
+                overlay.IsVisible = false;
+            }
+            else
+            {
+                overlay.IsVisible = true;
+                await overlay.FadeTo(1, 250);
+            }
+        }
     }
 
     private void OnSaveButtonClicked(object sender, EventArgs e)

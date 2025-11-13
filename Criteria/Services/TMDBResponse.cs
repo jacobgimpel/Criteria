@@ -24,5 +24,9 @@ namespace Criteria.Services
 
         [JsonProperty("poster_path")]
         public string? PosterPath { get; set; }
+
+        [JsonProperty("overview")]
+        public string? Overview { get; set; }
+
     }
 }
