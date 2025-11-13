@@ -17,10 +17,13 @@ public partial class RecommendationView : ContentPage
 
     private async void OnPosterTapped(object sender, TappedEventArgs e)
     {
-        if (sender is Image image && image.Parent is Grid grid)
+        if (sender is Image image)
         {
-            var overlay = grid.FindByName<Grid>("Overlay");
-            if (overlay == null) 
+            var parentGrid = image.Parent as Grid;
+            if (parentGrid == null)
+                return;
+            var overlay = parentGrid.FindByName<Grid>("Overlay");
+            if (overlay == null)
                 return;
 
             if (overlay.IsVisible)
@@ -33,6 +36,15 @@ public partial class RecommendationView : ContentPage
                 overlay.IsVisible = true;
                 await overlay.FadeTo(1, 250);
             }
+        }
+    }
+
+    private async void OnOverlayTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Grid overlay)
+        {
+            await overlay.FadeTo(0, 250);
+            overlay.IsVisible = false;
         }
     }
 

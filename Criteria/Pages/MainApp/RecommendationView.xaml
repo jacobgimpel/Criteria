@@ -37,34 +37,44 @@
                       Margin="0,20,0,20">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Image Source="{Binding PosterPath}"
-                               Aspect="AspectFit"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               HeightRequest="400"
-                               WidthRequest="300">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnPosterTapped" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                        
-                        <!-- Synopsis Overlay -->
-                        <Grid x:Name="Overlay"
-                              Background="Gray"
-                              IsVisible="False"
-                              Opacity="0"
-                              Padding="10"
-                              VerticalOptions="Fill"
-                              HorizontalOptions="Fill">
-                            <ScrollView>
-                                <Label Text="{Binding Overview}"
-                                       TextColor="White"
-                                       FontSize="14"
-                                       LineBreakMode="WordWrap"/>
-                            </ScrollView> 
+                    <Grid RowDefinitions="*,Auto">
+                        <!-- Poster Image with Tap -->
+                        <Grid Grid.Row="0"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center">
+
+                            <Image Source="{Binding PosterPath}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HeightRequest="400"
+                                   WidthRequest="300">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPosterTapped" />
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <!-- Synopsis Overlay -->
+                            <Grid x:Name="Overlay"
+                                  Background="Gray"
+                                  IsVisible="False"
+                                  Opacity="0"
+                                  Padding="10"
+                                  VerticalOptions="Fill"
+                                  HorizontalOptions="Fill">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnOverlayTapped" />
+                                </Grid.GestureRecognizers>
+
+                                <ScrollView>
+                                    <Label Text="{Binding Overview}"
+                                           TextColor="White"
+                                           FontSize="14"
+                                           LineBreakMode="WordWrap"/>
+                                </ScrollView>
+                            </Grid>
                         </Grid>
-                              
+
                         <!-- Movie Title -->
                         <Label Grid.Row="1"
                                Text="{Binding Title}"
@@ -73,7 +83,6 @@
                                TextColor="Black"
                                HorizontalOptions="Center"
                                Margin="0,10,0,0" />
-
                     </Grid>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
@@ -134,5 +143,4 @@
                 SemanticProperties.Hint="Return to home screen" />
         </Grid>
     </Grid>
-
 </ContentPage>
