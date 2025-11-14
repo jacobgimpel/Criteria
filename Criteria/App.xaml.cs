@@ -9,7 +9,7 @@ namespace Criteria
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Pages.FirstBoot.GenreSelectionPage());
+            MainPage = new NavigationPage(new Pages.MainApp.MainPage());
         }
     }
 }

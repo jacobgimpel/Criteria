@@ -1,25 +1,24 @@
-﻿namespace Criteria
+﻿namespace Criteria.Pages.MainApp;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    public MainPage()
     {
-        int count = 0;
-
-        public MainPage()
-        {
-            InitializeComponent();
-        }
-
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+        InitializeComponent();
     }
 
+    private async void OnFindButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new RecommendationView(new List<Models.Movie>()));
+    }
+
+    private async void OnSavedFilmsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new SavedFilms());
+    }
+
+    private void OnSettingsClicked(object sender, EventArgs e)
+    {
+        DisplayAlert("Settings", "Settings page clicked", "Ok");
+    }
 }
