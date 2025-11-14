@@ -31,12 +31,17 @@
                             <Frame HasShadow="False"
                                    BorderColor="Transparent"
                                    BackgroundColor="Transparent"
-                                   HeightRequest="250"
-                                   WidthRequest="170">
+                                   HeightRequest="300"
+                                   WidthRequest="200">
                                 <Grid>
 
                                     <Image Source="{Binding PosterPath}"
-                                           Aspect="AspectFill"/>
+                                           Aspect="AspectFill">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnPosterTapped"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+
 
                                     <!-- Overlay for synopsis -->
                                     <Grid x:Name="Overlay"
@@ -44,12 +49,18 @@
                                           Opacity="0"
                                           IsVisible="False">
 
-                                        <Label Text="{Binding Overview}"
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnOverlayTapped"/>
+                                        </Grid.GestureRecognizers>
+                                        
+                                        <ScrollView>
+                                            <Label Text="{Binding Overview}"
                                                TextColor="White"
                                                Padding="12"
                                                FontSize="14"
                                                HorizontalTextAlignment="Center"
                                                VerticalTextAlignment="Center" />
+                                        </ScrollView>
                                     </Grid>
 
                                 </Grid>

@@ -70,8 +70,8 @@ public partial class RecommendationView : ContentPage
         DisplayAlert("Home clicked", "Navigating to home", "Ok");
     }
 
-    private void OnBookmarkClicked(object sender, EventArgs e)
+    private async void OnSavedFilmsClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Bookmarks clicked", "Navigating to bookmarks", "Ok");
+        await Navigation.PushAsync(new SavedFilms());
     }
 }

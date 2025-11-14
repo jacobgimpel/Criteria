@@ -110,7 +110,7 @@
                 WidthRequest="60"
                 HeightRequest="60"
                 BackgroundColor="Transparent"
-                Clicked="OnBookmarkClicked"
+                Clicked="OnSavedFilmsClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 SemanticProperties.Hint="View saved films" />
