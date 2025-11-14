@@ -1,4 +1,6 @@
-﻿namespace Criteria.Pages.MainApp;
+﻿using System.Threading.Tasks;
+
+namespace Criteria.Pages.MainApp;
 
 public partial class MainPage : ContentPage
 {
@@ -17,8 +19,8 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(new SavedFilms());
     }
 
-    private void OnSettingsClicked(object sender, EventArgs e)
+    private async void OnSettingsClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Settings", "Settings page clicked", "Ok");
+        await Navigation.PushAsync(new SettingsPage());
     }
 }

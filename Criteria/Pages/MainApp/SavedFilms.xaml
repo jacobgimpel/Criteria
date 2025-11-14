@@ -16,7 +16,6 @@
                    HorizontalOptions="Center" />
         </StackLayout>
 
-
         <!-- Scrollable Movie Grid -->
         <ScrollView Grid.Row="1">
             <CollectionView x:Name="SavedFilmsCollection"
@@ -52,7 +51,7 @@
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnOverlayTapped"/>
                                         </Grid.GestureRecognizers>
-                                        
+
                                         <ScrollView>
                                             <Label Text="{Binding Overview}"
                                                TextColor="White"
@@ -62,24 +61,21 @@
                                                VerticalTextAlignment="Center" />
                                         </ScrollView>
                                     </Grid>
-
                                 </Grid>
                             </Frame>
-
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-
             </CollectionView>
         </ScrollView>
-
 
         <!-- Home Button -->
         <ImageButton Grid.Row="2"
                 Source="home.png"
                 CornerRadius="20"
                 HeightRequest="60"
-                Margin="0,10,0,0"/>
+                Margin="0,10,0,0"
+                Clicked="OnHomeClicked"/>
 
     </Grid>
 </ContentPage>

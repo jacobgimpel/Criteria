@@ -41,4 +41,10 @@ public partial class SavedFilms : ContentPage
             overlay.IsVisible = false;
         }
     }
+
+	private async void OnHomeClicked(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new MainPage());
+	}
+
 }
