@@ -50,7 +50,19 @@ public partial class RecommendationView : ContentPage
 
     private void OnSaveButtonClicked(object sender, EventArgs e)
     {
-        DisplayAlert("You saved", "Awesome", "Nice");
+        if (RecommendationsCarousel.CurrentItem is Movie currentMovie)
+        {
+            bool alreadyAdded = Criteria.Models.SavedFilms.SavedMovies.Any(m => m.TMDBId == currentMovie.TMDBId);
+            if (alreadyAdded)
+            {
+                DisplayAlert("This film has already been saved.", $"{currentMovie.Title} is already saved", "It is done");
+            }
+            else
+            {
+                Criteria.Models.SavedFilms.AddMovie(currentMovie);
+                DisplayAlert("Saved", $"{currentMovie.Title} has been saved to your bookmarks.", "Ok");
+            }
+        }
     }
 
     private void OnHomeClicked(object sender, EventArgs e)
