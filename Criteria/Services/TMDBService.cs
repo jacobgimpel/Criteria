@@ -15,6 +15,7 @@ namespace Criteria.Services
         private const string ImageBaseUrl = "https://image.tmdb.org/t/p/w500";
 
         private static readonly HttpClient client = new HttpClient();
+        private readonly Random _random = new Random();
 
         private readonly Dictionary<string, string> GenreMapping = new()
         {
@@ -23,9 +24,7 @@ namespace Criteria.Services
             {"Documentary", "99"}, {"Animation", "16"}, {"Mystery", "9648"}, {"Adventure", "12"}
         };
 
-        /// <summary>
-        /// Search for movies by query.
-        /// </summary>
+
         public async Task<List<Movie>> SearchMovieAsync(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
@@ -93,6 +92,8 @@ namespace Criteria.Services
             {
                 if (!GenreMapping.TryGetValue(genreTitle, out var genreId)) continue;
 
+                int randomPage = _random.Next(1, 6);
+
                 try
                 {
                     var response = await client.GetStringAsync($"{BaseUrl}/discover/movie?api_key={ApiKey}&with_genres={genreId}&sort_by=popularity.desc&page=1");
@@ -117,6 +118,7 @@ namespace Criteria.Services
             return recommendedMovies
                 .GroupBy(m => m.TMDBId)
                 .Select(g => g.First())
+                .OrderBy(_=> _random.Next())
                 .Take(maxResults)
                 .ToList();
         }
