@@ -1,6 +1,6 @@
 using Criteria.Models;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+
 namespace Criteria.Pages.MainApp;
 
 public partial class RecommendationView : ContentPage
@@ -10,21 +10,17 @@ public partial class RecommendationView : ContentPage
     public RecommendationView(List<Movie> recommendedMovies)
     {
         InitializeComponent();
-        _recommendedMovies = recommendedMovies;
+        _recommendedMovies = recommendedMovies ?? new List<Movie>();
 
         RecommendationsCarousel.ItemsSource = _recommendedMovies;
     }
 
     private async void OnPosterTapped(object sender, TappedEventArgs e)
     {
-        if (sender is Image image)
+        if (sender is Image image && image.Parent is Grid parentGrid)
         {
-            var parentGrid = image.Parent as Grid;
-            if (parentGrid == null)
-                return;
             var overlay = parentGrid.FindByName<Grid>("Overlay");
-            if (overlay == null)
-                return;
+            if (overlay == null) return;
 
             if (overlay.IsVisible)
             {
@@ -55,12 +51,12 @@ public partial class RecommendationView : ContentPage
             bool alreadyAdded = Criteria.Models.SavedFilms.SavedMovies.Any(m => m.TMDBId == currentMovie.TMDBId);
             if (alreadyAdded)
             {
-                DisplayAlert("This film has already been saved.", $"{currentMovie.Title} is already saved", "It is done");
+                DisplayAlert("Already Saved", $"{currentMovie.Title} is already saved.", "OK");
             }
             else
             {
                 Criteria.Models.SavedFilms.AddMovie(currentMovie);
-                DisplayAlert("Saved", $"{currentMovie.Title} has been saved to your bookmarks.", "Ok");
+                DisplayAlert("Saved", $"{currentMovie.Title} has been added to your bookmarks.", "OK");
             }
         }
     }

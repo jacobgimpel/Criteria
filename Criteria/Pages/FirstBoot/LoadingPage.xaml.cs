@@ -1,6 +1,8 @@
+using Criteria.Services;
 using Criteria.Models;
 using Newtonsoft.Json;
 using Microsoft.Maui.Storage;
+
 
 namespace Criteria.Pages.FirstBoot;
 
@@ -12,11 +14,12 @@ public partial class LoadingPage : ContentPage
     public LoadingPage(List<string> selectedGenres, List<Movie> selectedMovies)
     {
         InitializeComponent();
+
         _selectedGenres = selectedGenres;
         _selectedMovies = selectedMovies;
 
         SaveUserData();
-        _=LoadRecommendationsAsync();
+        _ = LoadRecommendationsAsync();
     }
 
     private void SaveUserData()
@@ -28,8 +31,21 @@ public partial class LoadingPage : ContentPage
 
     private async Task LoadRecommendationsAsync()
     {
-        var tmdbService = new Services.TMDBService();
-        var recommendedMovies = await tmdbService.GetRecommendationsAsync(_selectedMovies, _selectedGenres, 5);
-        Application.Current.MainPage = new NavigationPage(new Pages.MainApp.RecommendationView(recommendedMovies));
+        try
+        {
+            var tmdbService = new Criteria.Services.TMDBService();
+
+
+            var recommendedMovies = await tmdbService.GetRecommendationsAsync(_selectedMovies, _selectedGenres, 5);
+
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                Application.Current.MainPage = new NavigationPage(new Pages.MainApp.RecommendationView(recommendedMovies));
+            });
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Failed to load recommendations: {ex.Message}", "OK");
+        }
     }
 }
