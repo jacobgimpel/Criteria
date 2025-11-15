@@ -137,10 +137,10 @@
                 WidthRequest="60"
                 HeightRequest="60"
                 BackgroundColor="Transparent"
-                Clicked="OnHomeClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                SemanticProperties.Hint="Return to home screen" />
+                SemanticProperties.Hint="Return to home screen"
+                Clicked="OnHomeClicked"/>
         </Grid>
     </Grid>
 </ContentPage>

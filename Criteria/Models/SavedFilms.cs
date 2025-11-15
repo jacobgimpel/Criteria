@@ -17,5 +17,11 @@ namespace Criteria.Models
                 SavedMovies.Add(movie);
             }
         }
+
+        public static void RemoveMovie(Movie movie)
+        {
+            if (SavedMovies.Contains (movie))
+                SavedMovies.Remove(movie);
+        }
     }
 }

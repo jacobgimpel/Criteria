@@ -65,9 +65,9 @@ public partial class RecommendationView : ContentPage
         }
     }
 
-    private void OnHomeClicked(object sender, EventArgs e)
+    private async void OnHomeClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Home clicked", "Navigating to home", "Ok");
+        await Navigation.PushAsync(new MainPage());
     }
 
     private async void OnSavedFilmsClicked(object sender, EventArgs e)
