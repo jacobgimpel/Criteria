@@ -1,5 +1,6 @@
 using Criteria.Services;
 using Criteria.Models;
+using Criteria.Utilities;
 using Newtonsoft.Json;
 using Microsoft.Maui.Storage;
 
@@ -24,9 +25,9 @@ public partial class LoadingPage : ContentPage
 
     private void SaveUserData()
     {
-        Preferences.Set("HasCompletedFirstBoot", true);
-        Preferences.Set("SelectedGenres", JsonConvert.SerializeObject(_selectedGenres));
-        Preferences.Set("SelectedMovies", JsonConvert.SerializeObject(_selectedMovies));
+        Preferences.Set(SetPreferences.SelectionsCompleted, true);
+        Preferences.Set(SetPreferences.SelectedGenres, JsonConvert.SerializeObject(_selectedGenres));
+        Preferences.Set(SetPreferences.SelectedMovies, JsonConvert.SerializeObject(_selectedMovies));
     }
 
     private async Task LoadRecommendationsAsync()

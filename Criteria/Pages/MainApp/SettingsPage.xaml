@@ -16,6 +16,19 @@
                HorizontalOptions="Center"
                Margin="0,10,0,20" />
 
+        <!-- Buttons Stack -->
+        <VerticalStackLayout Grid.Row="1" Spacing="20" HorizontalOptions="Center">
+            <Button Text="About" 
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    Clicked="OnAboutClicked"/>
+            
+            <Button Text="Reset Preferences" 
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    Clicked="OnResetPreferencesClicked"/>
+        </VerticalStackLayout>
+        
         <!-- Home Button -->
         <ImageButton Grid.Row="2"
                      Source="home.png"

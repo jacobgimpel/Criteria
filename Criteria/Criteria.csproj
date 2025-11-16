@@ -71,6 +71,9 @@
 	  <Compile Update="Pages\FirstBoot\GenreSelection.xaml.cs">
 	    <DependentUpon>GenreSelection.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\MainApp\AboutPage.xaml.cs">
+	    <DependentUpon>AboutPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\MainApp\SettingsPage.xaml.cs">
 	    <DependentUpon>SettingsPage.xaml</DependentUpon>
 	  </Compile>
@@ -84,6 +87,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\FirstBoot\LoadingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MainApp\AboutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MainApp\RecommendationView.xaml">
