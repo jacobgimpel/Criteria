@@ -61,8 +61,9 @@ public partial class FilmSelectionPage : ContentPage
             {
                 Source = result.PosterPath,
                 Aspect = Aspect.AspectFill,
-                HeightRequest = 200,
-                WidthRequest = 150
+                HeightRequest = 160,
+                WidthRequest = 110,
+                Margin = new Thickness(5)
             };
 
             var tapGesture = new TapGestureRecognizer();
@@ -124,8 +125,8 @@ public partial class FilmSelectionPage : ContentPage
         {
             Source = _highlightedMovie.PosterPath,
             Aspect = Aspect.AspectFill,
-            HeightRequest = 100,
-            WidthRequest = 75,
+            HeightRequest = 80,
+            WidthRequest = 55,
             Margin = new Thickness(5)
         };
 
