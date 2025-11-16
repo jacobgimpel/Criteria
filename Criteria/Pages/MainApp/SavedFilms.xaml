@@ -26,14 +26,14 @@
                 <DataTemplate>
                     <Grid>
                         <Frame HasShadow="False"
-                               BackgroundColor="Transparent"
-                               HeightRequest="300"
-                               WidthRequest="200">
+                   BackgroundColor="Transparent"
+                   HeightRequest="300"
+                   WidthRequest="200">
                             <Grid>
 
                                 <!-- Movie Poster -->
                                 <Image Source="{Binding PosterPath}"
-                                       Aspect="AspectFill">
+                           Aspect="AspectFill">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnPosterTapped" />
                                     </Image.GestureRecognizers>
@@ -41,19 +41,21 @@
 
                                 <!-- Overlay (Synopsis) -->
                                 <Grid x:Name="Overlay"
-                                      BackgroundColor="#AA000000"
-                                      IsVisible="False"
-                                      Opacity="0">
+                          BackgroundColor="#AA000000"
+                          IsVisible="False"
+                          Opacity="0">
 
+                                    <!-- Close overlay -->
                                     <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnOverlayTapped" />
+                                        <TapGestureRecognizer Tapped="OnOverlayTapped"/>
                                     </Grid.GestureRecognizers>
-                                    
-                                    <ScrollView>
+
+                                    <!-- Make ScrollView transparent -->
+                                    <ScrollView InputTransparent="True">
                                         <Label Text="{Binding Overview}"
-                                               TextColor="White"
-                                               Padding="10"
-                                               FontSize="14" />
+                                   TextColor="White"
+                                   Padding="10"
+                                   FontSize="14" />
                                     </ScrollView>
                                 </Grid>
 
@@ -62,6 +64,7 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
 
         </CollectionView>
 
