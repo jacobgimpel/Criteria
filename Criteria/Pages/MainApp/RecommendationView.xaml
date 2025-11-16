@@ -4,9 +4,9 @@
              x:Class="Criteria.Pages.MainApp.RecommendationView"
              BackgroundColor="#595BBC">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="30">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20">
 
-        <!-- Title Centred at Top -->
+        <!-- Main App Title -->
         <Label Grid.Row="0"
                Text="Criteria."
                FontFamily="Lateef"
@@ -14,133 +14,118 @@
                FontAttributes="Bold"
                TextColor="Black"
                HorizontalOptions="Center"
-               Margin="0,10,0,20" />
+               Margin="0,10,0,20"/>
 
-        <!-- Instruction Text -->
+        <!-- Instructions -->
         <VerticalStackLayout Grid.Row="1" Spacing="5" HorizontalOptions="Center">
             <Label Text="Swipe left or right to navigate"
                    FontSize="18"
                    TextColor="Black"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"/>
             <Label Text="Tap on the poster to view more information"
                    FontSize="18"
                    TextColor="Black"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"/>
         </VerticalStackLayout>
 
-        <!-- Carousel of movie posters -->
-        <CarouselView x:Name="RecommendationsCarousel"
-                      Grid.Row="2"
-                      IndicatorView="carouselIndicators"
-                      HorizontalOptions="Fill"
-                      VerticalOptions="Fill"
-                      Margin="0,20,0,20">
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Grid RowDefinitions="*,Auto">
-                        <!-- Poster Image with Tap -->
-                        <Grid Grid.Row="0"
-                              HorizontalOptions="Center"
-                              VerticalOptions="Center">
+        <!-- Carousel + Overlay + Title -->
+        <Grid Grid.Row="2">
+            <CarouselView x:Name="RecommendationsCarousel"
+                          IndicatorView="carouselIndicators"
+                          HorizontalOptions="Fill"
+                          VerticalOptions="Fill"
+                          Margin="0,10,0,10">
 
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="450" WidthRequest="300">
+
+                            <!-- Poster Image -->
                             <Image Source="{Binding PosterPath}"
                                    Aspect="AspectFit"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   HeightRequest="400"
-                                   WidthRequest="300">
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnPosterTapped" />
+                                    <TapGestureRecognizer Tapped="OnPosterTapped"/>
                                 </Image.GestureRecognizers>
                             </Image>
 
-                            <!-- Synopsis Overlay -->
+                            <!-- Overlay (Synopsis) -->
                             <Grid x:Name="Overlay"
-                                  Background="Gray"
+                                  BackgroundColor="#AA000000"
                                   IsVisible="False"
-                                  Opacity="0"
-                                  Padding="10"
-                                  VerticalOptions="Fill"
-                                  HorizontalOptions="Fill">
+                                  Opacity="0">
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnOverlayTapped" />
+                                    <TapGestureRecognizer Tapped="OnOverlayTapped"/>
                                 </Grid.GestureRecognizers>
-
-                                <ScrollView>
+                                <ScrollView InputTransparent="True">
                                     <Label Text="{Binding Overview}"
                                            TextColor="White"
+                                           Padding="15"
                                            FontSize="14"
                                            LineBreakMode="WordWrap"/>
                                 </ScrollView>
                             </Grid>
+
+                            <!-- Movie Title at Bottom -->
+                            <Label Text="{Binding Title}"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"
+                                   BackgroundColor="#AAFFFFFF"
+                                   Padding="5"
+                                   Margin="0,0,0,10"/>
                         </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
 
-                        <!-- Movie Title -->
-                        <Label Grid.Row="1"
-                               Text="{Binding Title}"
-                               FontAttributes="Bold"
-                               FontSize="20"
-                               TextColor="Black"
-                               HorizontalOptions="Center"
-                               Margin="0,10,0,0" />
-                    </Grid>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
+            <!-- Indicator Dots -->
+            <IndicatorView x:Name="carouselIndicators"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           IndicatorColor="LightGray"
+                           SelectedIndicatorColor="Black"
+                           Margin="0,0,0,0"/>
+        </Grid>
 
-        <!-- Carousel indicator dots -->
-        <IndicatorView x:Name="carouselIndicators"
-                       Grid.Row="2"
-                       VerticalOptions="End"
-                       HorizontalOptions="Center"
-                       IndicatorColor="LightGray"
-                       SelectedIndicatorColor="Black"
-                       Margin="0,0,0,120" />
-
+        <!-- Footer Buttons -->
         <Grid Grid.Row="3"
               ColumnDefinitions="Auto,*,Auto"
-              Margin="0,30,0,0"
-              VerticalOptions="End"
-              HorizontalOptions="Fill">
+              Margin="0,20,0,0"
+              VerticalOptions="End">
 
-            <!-- Saved Films Icon -->
-            <ImageButton
-                Grid.Column="0"
-                Source="bookmark.png"
-                WidthRequest="60"
-                HeightRequest="60"
-                BackgroundColor="Transparent"
-                Clicked="OnSavedFilmsClicked"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                SemanticProperties.Hint="View saved films" />
+            <!-- Saved Films -->
+            <ImageButton Grid.Column="0"
+                         Source="bookmark.png"
+                         HeightRequest="60"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="Start"
+                         Clicked="OnSavedFilmsClicked"/>
 
             <!-- Save Button -->
-            <Button
-                Grid.Column="1"
-                x:Name="SaveButton"
-                Text="Save"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="30"
-                BackgroundColor="#E0E0E0"
-                CornerRadius="20"
-                HeightRequest="100"
-                HorizontalOptions="Fill"
-                VerticalOptions="Center"
-                Clicked="OnSaveButtonClicked" />
+            <Button Grid.Column="1"
+                    Text="Save"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    BackgroundColor="#E0E0E0"
+                    CornerRadius="20"
+                    HeightRequest="80"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    Clicked="OnSaveButtonClicked"/>
 
-            <!-- Home Icon -->
-            <ImageButton
-                Grid.Column="2"
-                Source="home.png"
-                WidthRequest="60"
-                HeightRequest="60"
-                BackgroundColor="Transparent"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                SemanticProperties.Hint="Return to home screen"
-                Clicked="OnHomeClicked"/>
+            <!-- Home -->
+            <ImageButton Grid.Column="2"
+                         Source="home.png"
+                         HeightRequest="60"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="End"
+                         Clicked="OnHomeClicked"/>
         </Grid>
+
     </Grid>
 </ContentPage>
