@@ -10,7 +10,7 @@ namespace Criteria.Services
 {
     public class TMDBService
     {
-        private const string ApiKey = "bfd8a54def262291ca861cc2a50e52ad";
+        private string _apiKey = Secrets.TmdbApiKey;
         private const string BaseUrl = "https://api.themoviedb.org/3";
         private const string ImageBaseUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -30,7 +30,7 @@ namespace Criteria.Services
             if (string.IsNullOrWhiteSpace(query))
                 return new List<Movie>();
 
-            var url = $"{BaseUrl}/search/movie?api_key={ApiKey}&query={Uri.EscapeDataString(query)}";
+            var url = $"{BaseUrl}/search/movie?api_key={_apiKey}&query={Uri.EscapeDataString(query)}";
 
             try
             {
@@ -69,7 +69,7 @@ namespace Criteria.Services
 
                 try
                 {
-                    var response = await client.GetStringAsync($"{BaseUrl}/movie/{movie.TMDBId}/similar?api_key={ApiKey}");
+                    var response = await client.GetStringAsync($"{BaseUrl}/movie/{movie.TMDBId}/similar?api_key={_apiKey}");
                     var tmdbResponse = JsonConvert.DeserializeObject<TMDBResponse>(response);
 
                     if (tmdbResponse?.Results != null)
@@ -96,7 +96,7 @@ namespace Criteria.Services
 
                 try
                 {
-                    var response = await client.GetStringAsync($"{BaseUrl}/discover/movie?api_key={ApiKey}&with_genres={genreId}&sort_by=popularity.desc&page=1");
+                    var response = await client.GetStringAsync($"{BaseUrl}/discover/movie?api_key={_apiKey}&with_genres={genreId}&sort_by=popularity.desc&page=1");
                     var tmdbResponse = JsonConvert.DeserializeObject<TMDBResponse>(response);
 
                     if (tmdbResponse?.Results != null)
