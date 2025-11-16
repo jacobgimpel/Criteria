@@ -10,7 +10,7 @@ namespace Criteria.Services
 {
     public class TMDBService
     {
-        private string _apiKey = Secrets.TmdbApiKey;
+        private string _apiKey = "2f4ba5fc63c680d7a0d0b11ffc80b780";
         private const string BaseUrl = "https://api.themoviedb.org/3";
         private const string ImageBaseUrl = "https://image.tmdb.org/t/p/w500";
 
