@@ -11,6 +11,8 @@ namespace Criteria.Pages.MainApp
         public SettingsPage()
         {
             InitializeComponent();
+            this.Appearing += (s, e) => Services.OrientationService.LockPortrait();
+            this.Disappearing += (s, e) => Services.OrientationService.UnlockOrientation();
         }
 
         private async void OnAboutClicked(object sender, EventArgs e)

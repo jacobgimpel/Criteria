@@ -21,6 +21,8 @@ public partial class LoadingPage : ContentPage
 
         SaveUserData();
         _ = LoadRecommendationsAsync();
+        this.Appearing += (s, e) => Services.OrientationService.LockPortrait();
+        this.Disappearing += (s, e) => Services.OrientationService.UnlockOrientation();
     }
 
     private void SaveUserData()

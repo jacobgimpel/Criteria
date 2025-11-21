@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 
+
+
 namespace Criteria
+
 {
     public static class MauiProgram
     {
@@ -18,7 +21,6 @@ namespace Criteria
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
             return builder.Build();
         }
     }

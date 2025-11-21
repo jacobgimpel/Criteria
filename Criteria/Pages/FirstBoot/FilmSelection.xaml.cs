@@ -15,6 +15,8 @@ public partial class FilmSelectionPage : ContentPage
     {
         InitializeComponent();
         SearchBar.TextChanged += OnSearchTextChanged;
+        this.Appearing += (s, e) => Services.OrientationService.LockPortrait();
+        this.Disappearing += (s, e) => Services.OrientationService.UnlockOrientation();
     }
 
     public FilmSelectionPage(List<string> selectedGenres) : this()

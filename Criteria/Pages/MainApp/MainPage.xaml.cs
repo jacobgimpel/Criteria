@@ -10,6 +10,8 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+        this.Appearing += (s, e) => Services.OrientationService.LockPortrait();
+        this.Disappearing += (s, e) => Services.OrientationService.UnlockOrientation();
     }
 
     private async void OnFindButtonClicked(object sender, EventArgs e)

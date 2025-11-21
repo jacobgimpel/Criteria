@@ -1,4 +1,5 @@
 
+using Criteria.Services;
 using System.Threading.Tasks;
 
 namespace Criteria.Pages.FirstBoot;
@@ -7,11 +8,15 @@ public partial class GenreSelectionPage : ContentPage
 {
 	public List<string> SelectedGenres { get; } = new List<string>();
     public GenreSelectionPage()
-	{
+    {
         InitializeComponent();
-	}
-	
-	private void OnGenreButtonClicked(object sender, EventArgs e)
+
+		this.Appearing += (s, e) => Services.OrientationService.LockPortrait();
+		this.Disappearing += (s, e) => Services.OrientationService.UnlockOrientation();
+    }
+
+
+    private void OnGenreButtonClicked(object sender, EventArgs e)
 	{
 		if (sender is Button button)
 		{
@@ -19,12 +24,12 @@ public partial class GenreSelectionPage : ContentPage
 			if (SelectedGenres.Contains(genre))
 			{
 				SelectedGenres.Remove(genre);
-				button.BackgroundColor = Color.FromArgb("#E0E0E0"); // Deselect
+				button.BackgroundColor = Color.FromArgb("#E0E0E0");
 			}
 			else
 			{
 				SelectedGenres.Add(genre);
-				button.BackgroundColor = Colors.Purple; // Select
+				button.BackgroundColor = Colors.Purple;
 			}
 
 			ContinueButton.IsEnabled = SelectedGenres.Count > 0;
