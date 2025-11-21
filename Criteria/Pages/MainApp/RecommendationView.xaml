@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.MainApp.RecommendationView"
-             BackgroundColor="#595BBC">
+             BackgroundColor="#595BBC"
+             SizeChanged="RecommendationView_SizeChanged">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20">
+    <Grid x:Name="MainGrid" RowDefinitions="Auto,Auto,*,Auto" Padding="20">
 
-        <!-- Main App Title -->
-        <Label Grid.Row="0"
+        <!-- Title -->
+        <Label x:Name="AppTitle"
+               Grid.Row="0"
                Text="Criteria."
                FontFamily="Lateef"
                FontSize="60"
@@ -17,7 +18,8 @@
                Margin="0,10,0,20"/>
 
         <!-- Instructions -->
-        <VerticalStackLayout Grid.Row="1" Spacing="5" HorizontalOptions="Center">
+        <VerticalStackLayout x:Name="InstructionsStack"
+                             Grid.Row="1" Spacing="5" HorizontalOptions="Center">
             <Label Text="Swipe left or right to navigate"
                    FontSize="18"
                    TextColor="Black"
@@ -28,8 +30,10 @@
                    HorizontalOptions="Center"/>
         </VerticalStackLayout>
 
-        <!-- Carousel + Overlay + Title -->
-        <Grid Grid.Row="2">
+        <!-- Main content -->
+        <Grid x:Name="ContentGrid" Grid.Row="2">
+
+            <!-- Portrait Carousel -->
             <CarouselView x:Name="RecommendationsCarousel"
                           IndicatorView="carouselIndicators"
                           HorizontalOptions="Fill"
@@ -50,7 +54,7 @@
                                 </Image.GestureRecognizers>
                             </Image>
 
-                            <!-- Overlay (Synopsis) -->
+                            <!-- Overlay (Portrait only) -->
                             <Grid x:Name="Overlay"
                                   BackgroundColor="#AA000000"
                                   IsVisible="False"
@@ -82,6 +86,43 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
+            <!-- Landscape Layout -->
+            <Grid x:Name="LandscapeGrid" IsVisible="False" ColumnDefinitions="*,*" RowDefinitions="*">
+
+                <!-- Left: Poster -->
+                <CarouselView x:Name="LandscapeCarousel"
+                              ItemsSource="{Binding _recommendedMovies}"
+                              HorizontalOptions="Fill"
+                              VerticalOptions="Fill"
+                              PositionChanged="LandscapeCarousel_PositionChanged">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding PosterPath}" Aspect="AspectFit"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+                <!-- Right: Synopsis + Save -->
+                <StackLayout Grid.Column="1" Spacing="10" Padding="10">
+                    <ScrollView>
+                        <Label x:Name="LandscapeSynopsis"
+                               Text=""
+                               TextColor="White"
+                               FontSize="16"
+                               LineBreakMode="WordWrap"/>
+                    </ScrollView>
+                    <Button x:Name="LandscapeSaveButton"
+                            Text="Save"
+                            FontAttributes="Bold"
+                            FontSize="22"
+                            BackgroundColor="#E0E0E0"
+                            TextColor="Black"
+                            CornerRadius="15"
+                            HeightRequest="60"
+                            Clicked="OnSaveButtonClicked"/>
+                </StackLayout>
+            </Grid>
+
             <!-- Indicator Dots -->
             <IndicatorView x:Name="carouselIndicators"
                            HorizontalOptions="Center"
@@ -92,13 +133,15 @@
         </Grid>
 
         <!-- Footer Buttons -->
-        <Grid Grid.Row="3"
+        <Grid x:Name="FooterGrid"
+              Grid.Row="3"
               ColumnDefinitions="Auto,*,Auto"
               Margin="0,20,0,0"
               VerticalOptions="End">
 
             <!-- Saved Films -->
-            <ImageButton Grid.Column="0"
+            <ImageButton x:Name="SavedFilmsButton"
+                         Grid.Column="0"
                          Source="bookmark.png"
                          HeightRequest="60"
                          BackgroundColor="Transparent"
@@ -106,7 +149,8 @@
                          Clicked="OnSavedFilmsClicked"/>
 
             <!-- Save Button -->
-            <Button Grid.Column="1"
+            <Button x:Name="SaveButton"
+                    Grid.Column="1"
                     Text="Save"
                     TextColor="Black"
                     FontAttributes="Bold"
@@ -119,13 +163,13 @@
                     Clicked="OnSaveButtonClicked"/>
 
             <!-- Home -->
-            <ImageButton Grid.Column="2"
+            <ImageButton x:Name="HomeButton"
+                         Grid.Column="2"
                          Source="home.png"
                          HeightRequest="60"
                          BackgroundColor="Transparent"
                          HorizontalOptions="End"
                          Clicked="OnHomeClicked"/>
         </Grid>
-
     </Grid>
 </ContentPage>

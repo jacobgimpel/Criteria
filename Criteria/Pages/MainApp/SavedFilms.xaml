@@ -1,97 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Criteria.Pages.MainApp.SavedFilms"
-             BackgroundColor="#595BBC">
-
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Criteria.Pages.MainApp.SavedFilms" BackgroundColor="#595BBC">
     <Grid RowDefinitions="Auto,*,Auto" Padding="20">
-
         <!-- Title -->
-        <Label Grid.Row="0"
-               Text="Criteria."
-               FontFamily="Lateef"
-               FontSize="60"
-               FontAttributes="Bold"
-               TextColor="Black"
-               HorizontalOptions="Center" />
-
+        <Label Grid.Row="0" Text="Criteria." FontFamily="Lateef" FontSize="60" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" />
         <!-- Movie Grid -->
-        <CollectionView Grid.Row="1"
-                        x:Name="SavedFilmsCollection"
-                        ItemsLayout="VerticalGrid, 2"
-                        SelectionMode="Single"
-                        SelectionChanged="OnMovieSelected">
-
+        <CollectionView Grid.Row="1" x:Name="SavedFilmsCollection" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectionChanged="OnMovieSelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Frame HasShadow="False"
-                   BackgroundColor="Transparent"
-                   HeightRequest="300"
-                   WidthRequest="200">
+                        <Frame HasShadow="False" BackgroundColor="Transparent" HeightRequest="300" WidthRequest="200">
                             <Grid>
-
                                 <!-- Movie Poster -->
-                                <Image Source="{Binding PosterPath}"
-                           Aspect="AspectFill">
+                                <Image Source="{Binding PosterPath}" Aspect="AspectFill">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnPosterTapped" />
                                     </Image.GestureRecognizers>
                                 </Image>
-
                                 <!-- Overlay (Synopsis) -->
-                                <Grid x:Name="Overlay"
-                          BackgroundColor="#AA000000"
-                          IsVisible="False"
-                          Opacity="0">
-
+                                <Grid x:Name="Overlay" BackgroundColor="#AA000000" IsVisible="False" Opacity="0">
                                     <!-- Close overlay -->
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnOverlayTapped"/>
                                     </Grid.GestureRecognizers>
-
                                     <!-- Make ScrollView transparent -->
                                     <ScrollView InputTransparent="True">
-                                        <Label Text="{Binding Overview}"
-                                   TextColor="White"
-                                   Padding="10"
-                                   FontSize="14" />
+                                        <Label Text="{Binding Overview}" TextColor="White" Padding="10" FontSize="14" />
                                     </ScrollView>
                                 </Grid>
-
                             </Grid>
                         </Frame>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
-
         </CollectionView>
-
         <!-- Bottom Controls -->
-        <Grid Grid.Row="2"
-              ColumnDefinitions="Auto,*,Auto"
-              Margin="0,15,0,0">
-
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" Margin="0,15,0,0">
             <!-- Home Button -->
-            <ImageButton Grid.Column="0"
-                         Source="home.png"
-                         HeightRequest="60"
-                         BackgroundColor="Transparent"
-                         Clicked="OnHomeClicked" />
-
+            <ImageButton Grid.Column="0" Source="home.png" HeightRequest="60" BackgroundColor="Transparent" Clicked="OnHomeClicked" />
             <!-- Spacer -->
             <Grid Grid.Column="1" />
-
             <!-- Delete Button -->
-            <ImageButton Grid.Column="2"
-                         Source="delete.png"
-                         HeightRequest="60"
-                         BackgroundColor="Transparent"
-                         Clicked="OnDeleteButtonClicked"/>
-
+            <ImageButton Grid.Column="2" Source="delete.png" HeightRequest="60" BackgroundColor="Transparent" Clicked="OnDeleteButtonClicked"/>
         </Grid>
-
     </Grid>
-
 </ContentPage>
