@@ -1,46 +1,159 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Criteria.Pages.MainApp.SavedFilms" BackgroundColor="#595BBC">
-    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Criteria.Pages.MainApp.SavedFilms"
+             BackgroundColor="#595BBC">
+
+    <Grid x:Name="MainGrid" RowDefinitions="Auto,*,Auto" Padding="20">
+
         <!-- Title -->
-        <Label Grid.Row="0" Text="Criteria." FontFamily="Lateef" FontSize="60" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" />
-        <!-- Movie Grid -->
-        <CollectionView Grid.Row="1" x:Name="SavedFilmsCollection" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectionChanged="OnMovieSelected">
+        <Label x:Name="TitleLabel"
+               Grid.Row="0"
+               Text="Criteria."
+               FontFamily="Lateef"
+               FontSize="60"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center" />
+
+        <!-- Portrait CollectionView -->
+        <CollectionView x:Name="PortraitLayout"
+                        Grid.Row="1"
+                        ItemsLayout="VerticalGrid, 2"
+                        SelectionMode="Single"
+                        SelectionChanged="PortraitLayout_SelectionChanged">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Frame HasShadow="False" BackgroundColor="Transparent" HeightRequest="300" WidthRequest="200">
-                            <Grid>
-                                <!-- Movie Poster -->
-                                <Image Source="{Binding PosterPath}" Aspect="AspectFill">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnPosterTapped" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                                <!-- Overlay (Synopsis) -->
-                                <Grid x:Name="Overlay" BackgroundColor="#AA000000" IsVisible="False" Opacity="0">
-                                    <!-- Close overlay -->
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnOverlayTapped"/>
-                                    </Grid.GestureRecognizers>
-                                    <!-- Make ScrollView transparent -->
-                                    <ScrollView InputTransparent="True">
-                                        <Label Text="{Binding Overview}" TextColor="White" Padding="10" FontSize="14" />
-                                    </ScrollView>
-                                </Grid>
+                    <Frame HasShadow="False"
+                           BackgroundColor="Transparent"
+                           HeightRequest="300"
+                           WidthRequest="200">
+                        <Grid>
+                            <Image Source="{Binding PosterPath}"
+                                   Aspect="AspectFill"
+                                   VerticalOptions="Fill"
+                                   HorizontalOptions="Fill">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPosterTapped" />
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <Grid x:Name="Overlay"
+                                  BackgroundColor="#AA000000"
+                                  IsVisible="False"
+                                  Opacity="0">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnOverlayTapped"/>
+                                </Grid.GestureRecognizers>
+                                <ScrollView InputTransparent="True">
+                                    <Label Text="{Binding Overview}"
+                                           TextColor="White"
+                                           Padding="10"
+                                           FontSize="14"
+                                           LineBreakMode="WordWrap"/>
+                                </ScrollView>
                             </Grid>
-                        </Frame>
-                    </Grid>
+                        </Grid>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
         <!-- Bottom Controls -->
-        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" Margin="0,15,0,0">
-            <!-- Home Button -->
-            <ImageButton Grid.Column="0" Source="home.png" HeightRequest="60" BackgroundColor="Transparent" Clicked="OnHomeClicked" />
-            <!-- Spacer -->
-            <Grid Grid.Column="1" />
-            <!-- Delete Button -->
-            <ImageButton Grid.Column="2" Source="delete.png" HeightRequest="60" BackgroundColor="Transparent" Clicked="OnDeleteButtonClicked"/>
+        <Grid x:Name="ControlsLayout"
+              Grid.Row="2"
+              ColumnDefinitions="Auto,*,Auto"
+              Margin="0,15,0,0">
+            <ImageButton Grid.Column="0"
+                         Source="home.png"
+                         HeightRequest="60"
+                         BackgroundColor="Transparent"
+                         Clicked="OnHomeClicked" />
+            <Grid Grid.Column="1"/>
+            <ImageButton Grid.Column="2"
+                         Source="delete.png"
+                         HeightRequest="60"
+                         BackgroundColor="Transparent"
+                         Clicked="OnDeleteButtonClicked"/>
         </Grid>
+
+        <!-- Landscape Layout -->
+        <Grid x:Name="LandscapeLayout" IsVisible="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Poster Carousel -->
+            <CarouselView x:Name="LandscapeCarousel"
+                          Grid.Row="0"
+                          Grid.Column="0"
+                          PositionChanged="LandscapeCarousel_PositionChanged"
+                          VerticalOptions="Fill"
+                          HorizontalOptions="Fill">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Source="{Binding PosterPath}"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="Fill"
+                                   HorizontalOptions="Fill">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPosterTapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <Grid x:Name="Overlay"
+                                  BackgroundColor="#AA000000"
+                                  IsVisible="False"
+                                  Opacity="0">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnOverlayTapped"/>
+                                </Grid.GestureRecognizers>
+                                <ScrollView InputTransparent="True">
+                                    <Label Text="{Binding Overview}"
+                                           TextColor="White"
+                                           Padding="10"
+                                           FontSize="14"
+                                           LineBreakMode="WordWrap"/>
+                                </ScrollView>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <!-- Synopsis + Delete Button -->
+            <Grid Grid.Row="0"
+                  Grid.Column="1"
+                  RowDefinitions="*,Auto"
+                  VerticalOptions="Fill"
+                  HorizontalOptions="Fill"
+                  Padding="10">
+
+                <ScrollView Grid.Row="0"
+                            VerticalOptions="Fill"
+                            HorizontalOptions="Fill">
+                    <Label x:Name="LandscapeSynopsis"
+                           TextColor="White"
+                           FontSize="16"
+                           LineBreakMode="WordWrap"/>
+                </ScrollView>
+
+                <ImageButton x:Name="LandscapeDeleteButton"
+                             Grid.Row="1"
+                             Source="delete.png"
+                             HeightRequest="60"
+                             WidthRequest="60"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="Center"
+                             Clicked="OnDeleteButtonClicked"/>
+            </Grid>
+        </Grid>
+
     </Grid>
 </ContentPage>
