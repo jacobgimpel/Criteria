@@ -103,8 +103,8 @@
                 </CarouselView>
 
                 <!-- Right: Synopsis + Save -->
-                <StackLayout Grid.Column="1" Spacing="10" Padding="10">
-                    <ScrollView>
+                <Grid Grid.Column="1" Padding="10" RowDefinitions="*, Auto">
+                    <ScrollView Grid.Row="0" HeightRequest="250">
                         <Label x:Name="LandscapeSynopsis"
                                Text=""
                                TextColor="White"
@@ -112,6 +112,7 @@
                                LineBreakMode="WordWrap"/>
                     </ScrollView>
                     <Button x:Name="LandscapeSaveButton"
+                            Grid.Row="1"
                             Text="Save"
                             FontAttributes="Bold"
                             FontSize="22"
@@ -120,7 +121,7 @@
                             CornerRadius="15"
                             HeightRequest="60"
                             Clicked="OnSaveButtonClicked"/>
-                </StackLayout>
+                </Grid>
             </Grid>
 
             <!-- Indicator Dots -->
