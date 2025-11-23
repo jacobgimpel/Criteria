@@ -104,7 +104,7 @@
 
                 <!-- Right: Synopsis + Save -->
                 <Grid Grid.Column="1" Padding="10" RowDefinitions="*, Auto">
-                    <ScrollView Grid.Row="0" HeightRequest="250">
+                    <ScrollView Grid.Row="0" HeightRequest="180">
                         <Label x:Name="LandscapeSynopsis"
                                Text=""
                                TextColor="White"

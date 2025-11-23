@@ -87,6 +87,8 @@ public partial class SavedFilms : ContentPage
 
     private async void OnPosterTapped(object sender, EventArgs e)
     {
+        if (Width <= Height)
+
         if (sender is Image image && image.Parent is Grid parentGrid)
         {
             var overlay = parentGrid.FindByName<Grid>("Overlay");

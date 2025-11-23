@@ -79,7 +79,7 @@
         </Grid>
 
         <!-- Landscape Layout -->
-        <Grid x:Name="LandscapeLayout" IsVisible="False">
+        <Grid x:Name="LandscapeLayout" VerticalOptions="Center" IsVisible="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -97,31 +97,12 @@
                           HorizontalOptions="Fill">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
                             <Image Source="{Binding PosterPath}"
                                    Aspect="AspectFit"
                                    VerticalOptions="Fill"
                                    HorizontalOptions="Fill">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnPosterTapped"/>
-                                </Image.GestureRecognizers>
                             </Image>
-
-                            <Grid x:Name="Overlay"
-                                  BackgroundColor="#AA000000"
-                                  IsVisible="False"
-                                  Opacity="0">
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnOverlayTapped"/>
-                                </Grid.GestureRecognizers>
-                                <ScrollView InputTransparent="True">
-                                    <Label Text="{Binding Overview}"
-                                           TextColor="White"
-                                           Padding="10"
-                                           FontSize="14"
-                                           LineBreakMode="WordWrap"/>
-                                </ScrollView>
-                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
@@ -136,8 +117,7 @@
                   Padding="10">
 
                 <ScrollView Grid.Row="0"
-                            VerticalOptions="Fill"
-                            HorizontalOptions="Fill">
+                            HeightRequest="180">
                     <Label x:Name="LandscapeSynopsis"
                            TextColor="White"
                            FontSize="16"
