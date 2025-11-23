@@ -20,7 +20,7 @@ public partial class SavedFilms : ContentPage
 
     private void SavedFilms_SizeChanged(object sender, EventArgs e)
     {
-        if (Width > Height) //Landscape
+        if (Width > Height)
         {
             TitleLabel.IsVisible = false;
             ControlsLayout.IsVisible = false;
@@ -28,7 +28,7 @@ public partial class SavedFilms : ContentPage
             LandscapeLayout.IsVisible = true;
             UpdateLandscapeContent();
         }
-        else //Portrait
+        else
         {
             TitleLabel.IsVisible = true;
             ControlsLayout.IsVisible = true;
