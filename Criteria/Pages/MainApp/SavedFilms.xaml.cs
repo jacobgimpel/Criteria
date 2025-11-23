@@ -6,6 +6,7 @@ namespace Criteria.Pages.MainApp;
 public partial class SavedFilms : ContentPage
 {
     private Movie _selectedMovie;
+    private Grid _currentOpenOverlay = null;
 
     public SavedFilms()
     {
@@ -87,23 +88,42 @@ public partial class SavedFilms : ContentPage
 
     private async void OnPosterTapped(object sender, EventArgs e)
     {
-        if (Width <= Height)
+        if (Width > Height)
+            return;
 
-        if (sender is Image image && image.Parent is Grid parentGrid)
+        if (sender is not Image tappedImage)
+            return;
+        
+        if (tappedImage.BindingContext is Movie tappedMovie)
         {
-            var overlay = parentGrid.FindByName<Grid>("Overlay");
-            if (overlay == null) return;
+            _selectedMovie = tappedMovie;
+            PortraitLayout.SelectedItem = tappedMovie;
+        }
 
-            if (overlay.IsVisible)
-            {
-                await overlay.FadeTo(0, 250);
-                overlay.IsVisible = false;
-            }
-            else
-            {
-                overlay.IsVisible = true;
-                await overlay.FadeTo(1, 250);
-            }
+        if (tappedImage.Parent is not Grid parentGrid)
+            return;
+
+        var thisOverlay = parentGrid.FindByName<Grid>("Overlay");
+        if (thisOverlay == null)
+            return;
+
+        if (_currentOpenOverlay != null && _currentOpenOverlay != thisOverlay)
+        {
+            _currentOpenOverlay.IsVisible = false;
+            _currentOpenOverlay.Opacity = 0;
+        }
+
+        if (thisOverlay.IsVisible)
+        {
+            await thisOverlay.FadeTo(0, 150);
+            thisOverlay.IsVisible = false;
+            _currentOpenOverlay = null;
+        }
+        else
+        {
+            thisOverlay.IsVisible = true;
+            await thisOverlay.FadeTo(1, 150);
+            _currentOpenOverlay = thisOverlay;
         }
     }
 
@@ -113,6 +133,9 @@ public partial class SavedFilms : ContentPage
         {
             await overlay.FadeTo(0, 250);
             overlay.IsVisible = false;
+
+            if (_currentOpenOverlay == overlay)
+                _currentOpenOverlay = null;
         }
     }
 }
