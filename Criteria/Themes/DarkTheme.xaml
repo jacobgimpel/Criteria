@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ************** -->
+    <!--   DARK COLORS   -->
+    <!-- ************** -->
+
+    <Color x:Key="PageBackgroundColor">#595BBC</Color>
+    <Color x:Key="PrimaryTextColor">Black</Color>
+    <Color x:Key="SecondaryTextColor">White</Color>
+
+    <Color x:Key="OverlayColor">#AA000000</Color>
+    <Color x:Key="PosterTitleBackgroundColor">#AAFFFFFF</Color>
+
+    <Color x:Key="IndicatorColor">LightGray</Color>
+    <Color x:Key="IndicatorSelectedColor">Black</Color>
+
+    <Color x:Key="PrimaryButtonBackground">#E0E0E0</Color>
+    <Color x:Key="PrimaryButtonTextColor">Black</Color>
+
+    <Color x:Key="IconBackground">Transparent</Color>
+
+    <!-- Page style -->
+    <Style x:Key="PageStyle" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+    </Style>
+
+    <!-- Title label style -->
+    <Style x:Key="TitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+    </Style>
+
+    <!-- Regular instruction label -->
+    <Style x:Key="InstructionLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <!-- Poster title label -->
+    <Style x:Key="PosterTitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource PosterTitleBackgroundColor}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="Padding" Value="5" />
+    </Style>
+
+    <!-- Overlay style -->
+    <Style x:Key="OverlayStyle" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{DynamicResource OverlayColor}" />
+    </Style>
+
+    <!-- Button style -->
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryButtonBackground}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryButtonTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- IndicatorView style -->
+    <Style x:Key="IndicatorViewStyle" TargetType="IndicatorView">
+        <Setter Property="IndicatorColor" Value="{DynamicResource IndicatorColor}" />
+        <Setter Property="SelectedIndicatorColor" Value="{DynamicResource IndicatorSelectedColor}" />
+    </Style>
+
+    <!-- Icon buttons (footer icons) -->
+    <Style x:Key="IconButtonStyle" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="{DynamicResource IconBackground}" />
+        <Setter Property="HeightRequest" Value="60" />
+    </Style>
+
+</ResourceDictionary>
