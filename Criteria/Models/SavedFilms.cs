@@ -6,22 +6,29 @@ using System.Threading.Tasks;
 
 namespace Criteria.Models
 {
-    public class SavedFilms
+    public static class SavedFilms
     {
-        public static List<Movie> SavedMovies { get; set; } = new List<Movie>();
-
-        public static void AddMovie(Movie movie)
+        public static async Task<List<Movie>> LoadSavedMoviesAsync()
         {
-            if (!SavedMovies.Any(m => m.TMDBId == movie.TMDBId))
-            {
-                SavedMovies.Add(movie);
-            }
+            return await App.DatabaseService.GetMoviesAsync();
         }
 
-        public static void RemoveMovie(Movie movie)
+        public static async Task AddMovieAsync(Movie movie)
         {
-            if (SavedMovies.Contains (movie))
-                SavedMovies.Remove(movie);
+            await App.DatabaseService.SaveMovieAsync(movie);
         }
+
+        public static async Task DeleteMovieAsync(Movie movie)
+        {
+            await App.DatabaseService.DeleteMovieAsync(movie);
+        }
+
+        public static async Task<bool> IsMovieSavedAsync(string tmdbId)
+        {
+            var savedMovies = await LoadSavedMoviesAsync();
+            return savedMovies.Any(m => m.TMDBId == tmdbId);
+        }
+
     }
+    
 }
