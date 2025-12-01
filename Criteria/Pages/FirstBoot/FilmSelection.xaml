@@ -1,7 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.FirstBoot.FilmSelectionPage"
-             BackgroundColor="#595BBC">
+             Style="{DynamicResource PageStyle}">
 
     <Grid Padding="15" RowDefinitions="Auto, *, Auto, Auto">
 
@@ -11,28 +11,28 @@
                    FontFamily="Lateef"
                    FontSize="42"
                    FontAttributes="Bold"
-                   TextColor="Black"
+                   Style="{DynamicResource TitleLabelStyle}"
                    HorizontalTextAlignment="Center"/>
 
             <Label Text="What are some of your favourite films?"
                    FontSize="18"
-                   TextColor="Black"
+                   Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalTextAlignment="Center"/>
 
             <Label Text="Search for and select 6:"
                    FontSize="14"
-                   TextColor="Black"
+                   Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalTextAlignment="Center"/>
 
             <Label x:Name="CounterLabel"
                    Text="0/6 Selected"
                    FontSize="18"
-                   TextColor="Black"
+                   Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalTextAlignment="Center"/>
 
             <SearchBar x:Name="SearchBar"
                        Placeholder="Search for a movie"
-                       BackgroundColor="#dddddd"
+                       BackgroundColor="{DynamicResource SearchBarBackgroundColor}"
                        FontSize="14"
                        HeightRequest="45"/>
         </VerticalStackLayout>
@@ -55,17 +55,16 @@
         <!-- Buttons -->
         <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center" Spacing="20" Padding="5">
             <ImageButton Source="plus_circle.png"
-                         BackgroundColor="Transparent"
+                         Style="{DynamicResource IconButtonStyle}"
                          WidthRequest="60"
                          HeightRequest="60"
                          Clicked="OnAddButtonClicked"/>
 
             <Button x:Name="ContinueButton"
                     Text="Continue"
-                    TextColor="Black"
+                    Style="{DynamicResource PrimaryButtonStyle}"
                     FontAttributes="Bold"
                     FontSize="20"
-                    BackgroundColor="#E0E0E0"
                     CornerRadius="14"
                     HeightRequest="60"
                     WidthRequest="180"

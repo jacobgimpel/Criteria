@@ -3,10 +3,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!-- ************** -->
-    <!--   DARK COLORS   -->
-    <!-- ************** -->
-
     <Color x:Key="PageBackgroundColor">#595BBC</Color>
     <Color x:Key="PrimaryTextColor">Black</Color>
     <Color x:Key="SecondaryTextColor">White</Color>
@@ -72,6 +68,12 @@
     <Style x:Key="IconButtonStyle" TargetType="ImageButton">
         <Setter Property="BackgroundColor" Value="{DynamicResource IconBackground}" />
         <Setter Property="HeightRequest" Value="60" />
+    </Style>
+
+    <Color x:Key="OverlayBackgroundColor">#AA000000</Color>
+    <!-- semi-transparent black -->
+    <Style x:Key="OverlayLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="White"/>
     </Style>
 
 </ResourceDictionary>

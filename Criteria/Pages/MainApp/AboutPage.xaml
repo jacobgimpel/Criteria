@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.MainApp.AboutPage"
              Title="About"
-             BackgroundColor="#595BBC"
+             Style="{DynamicResource PageStyle}"
              Padding="20">
 
     <Grid RowDefinitions="Auto,Auto,*,Auto">
@@ -13,7 +13,7 @@
                FontFamily="Lateef"
                FontSize="50"
                FontAttributes="Bold"
-               TextColor="Black"
+               Style="{DynamicResource TitleLabelStyle}"
                HorizontalOptions="Center"
                Margin="0,10,0,20"/>
 
@@ -21,12 +21,12 @@
         <VerticalStackLayout Grid.Row="1" Spacing="15">
             <Label Text="Criteria is an open source application developed using .NET MAUI that makes use of the TMDB API."
                    FontSize="18"
-                   TextColor="Black"
+                   Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"/>
             <Label x:Name="VersionLabel"
                    FontSize="18"
-                   TextColor="Black"
+                   Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalOptions="Center"/>
         </VerticalStackLayout>
 
@@ -39,7 +39,7 @@
                      CornerRadius="20"
                      HeightRequest="60"
                      WidthRequest="60"
-                     BackgroundColor="Transparent"
+                     Style="{DynamicResource IconButtonStyle}"
                      Clicked="OnHomeClicked"
                      HorizontalOptions="Center"
                      VerticalOptions="Center"

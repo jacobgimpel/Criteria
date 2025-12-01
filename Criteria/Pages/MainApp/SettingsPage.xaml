@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.MainApp.SettingsPage"
-             BackgroundColor="#595BBC">
+             Style="{DynamicResource PageStyle}">
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="30">
 
@@ -12,33 +11,34 @@
                FontFamily="Lateef"
                FontSize="60"
                FontAttributes="Bold"
-               TextColor="Black"
+               Style="{DynamicResource TitleLabelStyle}"
                HorizontalOptions="Center"
                Margin="0,10,0,20" />
 
         <!-- Buttons Stack -->
         <VerticalStackLayout Grid.Row="1" Spacing="20" HorizontalOptions="Center">
-            <Button Text="About" 
+            <Button Text="About"
+                    Style="{DynamicResource PrimaryButtonStyle}"
                     WidthRequest="200"
                     HeightRequest="50"
                     Clicked="OnAboutClicked"/>
-            
-            <Button Text="Reset Preferences" 
+
+            <Button Text="Reset Preferences"
+                    Style="{DynamicResource PrimaryButtonStyle}"
                     WidthRequest="200"
                     HeightRequest="50"
                     Clicked="OnResetPreferencesClicked"/>
         </VerticalStackLayout>
-        
+
         <!-- Home Button -->
         <ImageButton Grid.Row="2"
                      Source="home.png"
-                     CornerRadius="20"
+                     Style="{DynamicResource IconButtonStyle}"
                      HeightRequest="60"
                      WidthRequest="60"
-                     BackgroundColor="Transparent"
-                     Clicked="OnHomeClicked"
                      HorizontalOptions="Center"
                      VerticalOptions="Center"
-                     SemanticProperties.Hint="Return to home screen"/>
+                     SemanticProperties.Hint="Return to home screen"
+                     Clicked="OnHomeClicked"/>
     </Grid>
 </ContentPage>

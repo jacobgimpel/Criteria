@@ -1,7 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.FirstBoot.GenreSelectionPage"
-             BackgroundColor="#595BBC"
+             Style="{DynamicResource PageStyle}"
              Padding="20"
              Shell.NavBarIsVisible="False">
 
@@ -14,16 +14,16 @@
                        FontFamily="Lateef"
                        FontSize="48"
                        FontAttributes="Bold"
-                       TextColor="Black"
+                       Style="{DynamicResource TitleLabelStyle}"
                        HorizontalOptions="Center" />
                 <Label Text="So, what do you like to watch?"
                        FontSize="18"
-                       TextColor="Black"
+                       Style="{DynamicResource InstructionLabelStyle}"
                        HorizontalOptions="Center"
                        HorizontalTextAlignment="Center"/>
                 <Label Text="Select as many genres as you like (minimum 1):"
                        FontSize="14"
-                       TextColor="Black"
+                       Style="{DynamicResource InstructionLabelStyle}"
                        HorizontalOptions="Center"
                        HorizontalTextAlignment="Center"/>
             </VerticalStackLayout>
@@ -31,31 +31,30 @@
             <!-- Genre Buttons -->
             <Grid ColumnDefinitions="*, *" ColumnSpacing="15" RowSpacing="15">
                 <VerticalStackLayout Spacing="15">
-                    <Button Text="Action" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Comedy" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Drama" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Horror" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Romance" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Thriller" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Action" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Comedy" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Drama" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Horror" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Romance" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Thriller" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="15" Grid.Column="1">
-                    <Button Text="Sci-Fi" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Fantasy" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Documentary" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Animation" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Mystery" Clicked="OnGenreButtonClicked"/>
-                    <Button Text="Adventure" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Sci-Fi" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Fantasy" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Documentary" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Animation" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Mystery" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
+                    <Button Text="Adventure" Style="{DynamicResource PrimaryButtonStyle}" Clicked="OnGenreButtonClicked"/>
                 </VerticalStackLayout>
             </Grid>
 
             <!-- Continue Button -->
             <Button x:Name="ContinueButton"
                     Text="Continue"
-                    TextColor="White"
+                    Style="{DynamicResource PrimaryButtonStyle}"
                     FontAttributes="Bold"
                     FontSize="24"
-                    BackgroundColor="Gray"
                     CornerRadius="20"
                     HeightRequest="60"
                     IsEnabled="False"

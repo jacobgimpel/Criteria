@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.MainApp.SavedFilms"
-             BackgroundColor="#595BBC">
+             Style="{DynamicResource PageStyle}">
 
     <Grid x:Name="MainGrid" RowDefinitions="Auto,*,Auto" Padding="20">
 
@@ -13,7 +12,7 @@
                FontFamily="Lateef"
                FontSize="60"
                FontAttributes="Bold"
-               TextColor="Black"
+               Style="{DynamicResource TitleLabelStyle}"
                HorizontalOptions="Center" />
 
         <!-- Portrait CollectionView -->
@@ -40,7 +39,7 @@
                             </Image>
 
                             <Grid x:Name="Overlay"
-                                  BackgroundColor="#AA000000"
+                                  BackgroundColor="{DynamicResource OverlayBackgroundColor}"
                                   IsVisible="False"
                                   Opacity="0">
                                 <Grid.GestureRecognizers>
@@ -48,7 +47,7 @@
                                 </Grid.GestureRecognizers>
                                 <ScrollView InputTransparent="True">
                                     <Label Text="{Binding Overview}"
-                                           TextColor="White"
+                                           Style="{DynamicResource OverlayLabelStyle}"
                                            Padding="10"
                                            FontSize="14"
                                            LineBreakMode="WordWrap"/>
@@ -67,14 +66,14 @@
               Margin="0,15,0,0">
             <ImageButton Grid.Column="0"
                          Source="home.png"
+                         Style="{DynamicResource IconButtonStyle}"
                          HeightRequest="60"
-                         BackgroundColor="Transparent"
                          Clicked="OnHomeClicked" />
             <Grid Grid.Column="1"/>
             <ImageButton Grid.Column="2"
                          Source="delete.png"
+                         Style="{DynamicResource IconButtonStyle}"
                          HeightRequest="60"
-                         BackgroundColor="Transparent"
                          Clicked="OnDeleteButtonClicked"/>
         </Grid>
 
@@ -101,8 +100,7 @@
                             <Image Source="{Binding PosterPath}"
                                    Aspect="AspectFit"
                                    VerticalOptions="Fill"
-                                   HorizontalOptions="Fill">
-                            </Image>
+                                   HorizontalOptions="Fill"/>
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
@@ -116,10 +114,9 @@
                   HorizontalOptions="Fill"
                   Padding="10">
 
-                <ScrollView Grid.Row="0"
-                            HeightRequest="180">
+                <ScrollView Grid.Row="0" HeightRequest="180">
                     <Label x:Name="LandscapeSynopsis"
-                           TextColor="White"
+                           Style="{DynamicResource OverlayLabelStyle}"
                            FontSize="16"
                            LineBreakMode="WordWrap"/>
                 </ScrollView>
@@ -127,9 +124,9 @@
                 <ImageButton x:Name="LandscapeDeleteButton"
                              Grid.Row="1"
                              Source="delete.png"
+                             Style="{DynamicResource IconButtonStyle}"
                              HeightRequest="60"
                              WidthRequest="60"
-                             BackgroundColor="Transparent"
                              HorizontalOptions="Center"
                              Clicked="OnDeleteButtonClicked"/>
             </Grid>

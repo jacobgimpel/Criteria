@@ -38,6 +38,8 @@
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
     </Style>
 
+    <Color x:Key="SearchBarBackgroundColor">#333333</Color>
+
     <!-- Regular instruction label -->
     <Style x:Key="InstructionLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
@@ -80,4 +82,10 @@
         <Setter Property="HeightRequest" Value="60" />
     </Style>
 
+    <Color x:Key="OverlayBackgroundColor">#AAFFFFFF</Color>
+    <!-- semi-transparent white -->
+    <Style x:Key="OverlayLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="Black"/>
+    </Style>
+    
 </ResourceDictionary>

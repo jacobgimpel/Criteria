@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.FirstBoot.LoadingPage"
-             BackgroundColor="#595BBC">
+             Style="{DynamicResource PageStyle}">
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="30">
 
@@ -12,7 +12,7 @@
                FontFamily="Lateef"
                FontSize="60"
                FontAttributes="Bold"
-               TextColor="Black"
+               Style="{DynamicResource TitleLabelStyle}"
                HorizontalOptions="Center" />
 
         <!-- Centered Loading Text in middle -->
@@ -22,11 +22,11 @@
             Spacing="4">
             <Label Text="Let's find you something to watch."
                    FontSize="18"
-                   TextColor="Black"
+                   Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalOptions="Center" />
             <Label Text="Please wait"
                    FontSize="16"
-                   TextColor="Black"
+                   Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalOptions="Center" />
         </VerticalStackLayout>
 
