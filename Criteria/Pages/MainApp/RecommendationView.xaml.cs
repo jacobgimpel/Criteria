@@ -2,6 +2,7 @@ using Criteria.Models;
 using System;
 using System.Collections.Generic;
 using Microsoft.Maui.Controls;
+using System.Threading.Tasks;
 
 namespace Criteria.Pages.MainApp;
 
@@ -55,7 +56,7 @@ public partial class RecommendationView : ContentPage
         }
     }
 
-    private void OnSaveButtonClicked(object sender, EventArgs e)
+    private async void OnSaveButtonClicked(object sender, EventArgs e)
     {
         Movie currentMovie = null;
 
@@ -70,14 +71,14 @@ public partial class RecommendationView : ContentPage
 
         if (currentMovie == null) return;
 
-        bool alreadySaved = Models.SavedFilms.SavedMovies.Exists(m => m.TMDBId == currentMovie.TMDBId);
+        bool alreadySaved = await Models.SavedFilms.IsMovieSavedAsync(currentMovie.TMDBId);
         if (alreadySaved)
         {
             DisplayAlert("Already Saved", $"{currentMovie.Title} is already saved.", "OK");
         }
         else
         {
-            Models.SavedFilms.AddMovie(currentMovie);
+            await Models.SavedFilms.AddMovieAsync(currentMovie);
             DisplayAlert("Saved", $"{currentMovie.Title} has been added to your bookmarks.", "OK");
         }
     }

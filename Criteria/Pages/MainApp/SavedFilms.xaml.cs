@@ -1,5 +1,6 @@
 using Criteria.Models;
 using Microsoft.Maui.Controls;
+using System.Threading.Tasks;
 
 namespace Criteria.Pages.MainApp;
 
@@ -12,10 +13,26 @@ public partial class SavedFilms : ContentPage
     {
         InitializeComponent();
 
-        PortraitLayout.ItemsSource = Models.SavedFilms.SavedMovies;
-        LandscapeCarousel.ItemsSource = Models.SavedFilms.SavedMovies;
-
         SizeChanged += SavedFilms_SizeChanged;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await LoadSavedMoviesAsync();
+    }
+
+    private async Task LoadSavedMoviesAsync()
+    {
+        var savedMovies = await Models.SavedFilms.LoadSavedMoviesAsync();
+
+        if (savedMovies == null)
+        {
+            savedMovies = new List<Movie>();
+        }
+
+        PortraitLayout.ItemsSource = savedMovies;
+        LandscapeCarousel.ItemsSource = savedMovies;
     }
 
     private void SavedFilms_SizeChanged(object sender, EventArgs e)
@@ -70,14 +87,10 @@ public partial class SavedFilms : ContentPage
 
         if (confirm)
         {
-            Models.SavedFilms.SavedMovies.Remove(_selectedMovie);
-            PortraitLayout.ItemsSource = null;
-            PortraitLayout.ItemsSource = Models.SavedFilms.SavedMovies;
-
-            LandscapeCarousel.ItemsSource = null;
-            LandscapeCarousel.ItemsSource = Models.SavedFilms.SavedMovies;
-
+            await Models.SavedFilms.DeleteMovieAsync(_selectedMovie);
+            await LoadSavedMoviesAsync();
             _selectedMovie = null;
+            UpdateLandscapeContent();
         }
     }
 
