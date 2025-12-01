@@ -1,6 +1,8 @@
 using Criteria.Models;
 using Microsoft.Maui.Controls;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic; 
 
 namespace Criteria.Pages.MainApp;
 
@@ -12,8 +14,6 @@ public partial class SavedFilms : ContentPage
     public SavedFilms()
     {
         InitializeComponent();
-
-        SizeChanged += SavedFilms_SizeChanged;
     }
 
     protected override async void OnAppearing()
@@ -33,24 +33,11 @@ public partial class SavedFilms : ContentPage
 
         PortraitLayout.ItemsSource = savedMovies;
         LandscapeCarousel.ItemsSource = savedMovies;
-    }
 
-    private void SavedFilms_SizeChanged(object sender, EventArgs e)
-    {
-        if (Width > Height)
+        if (LandscapeCarousel.CurrentItem == null && savedMovies.Any())
         {
-            TitleLabel.IsVisible = false;
-            ControlsLayout.IsVisible = false;
-            PortraitLayout.IsVisible = false;
-            LandscapeLayout.IsVisible = true;
+            _selectedMovie = savedMovies.FirstOrDefault();
             UpdateLandscapeContent();
-        }
-        else
-        {
-            TitleLabel.IsVisible = true;
-            ControlsLayout.IsVisible = true;
-            PortraitLayout.IsVisible = true;
-            LandscapeLayout.IsVisible = false;
         }
     }
 
@@ -68,9 +55,13 @@ public partial class SavedFilms : ContentPage
 
     private void UpdateLandscapeContent()
     {
-        if (_selectedMovie != null)
+        if (_selectedMovie != null && LandscapeSynopsis != null)
         {
             LandscapeSynopsis.Text = _selectedMovie.Overview;
+        }
+        else if (LandscapeSynopsis != null)
+        {
+            LandscapeSynopsis.Text = "Select a film to view the synopsis.";
         }
     }
 
@@ -88,8 +79,10 @@ public partial class SavedFilms : ContentPage
         if (confirm)
         {
             await Models.SavedFilms.DeleteMovieAsync(_selectedMovie);
-            await LoadSavedMoviesAsync();
+
+            PortraitLayout.SelectedItem = null;
             _selectedMovie = null;
+            await LoadSavedMoviesAsync();
             UpdateLandscapeContent();
         }
     }
@@ -101,12 +94,10 @@ public partial class SavedFilms : ContentPage
 
     private async void OnPosterTapped(object sender, EventArgs e)
     {
-        if (Width > Height)
-            return;
 
         if (sender is not Image tappedImage)
             return;
-        
+
         if (tappedImage.BindingContext is Movie tappedMovie)
         {
             _selectedMovie = tappedMovie;

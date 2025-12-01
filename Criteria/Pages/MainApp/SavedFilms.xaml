@@ -3,6 +3,33 @@
              x:Class="Criteria.Pages.MainApp.SavedFilms"
              Style="{DynamicResource PageStyle}">
 
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="OrientationStates">
+            <VisualState x:Name="Portrait">
+                <VisualState.Setters>
+                    <Setter TargetName="PortraitLayout" Property="IsVisible" Value="True"/>
+                    <Setter TargetName="ControlsLayout" Property="IsVisible" Value="True"/>
+                    <Setter TargetName="LandscapeLayout" Property="IsVisible" Value="False"/>
+                </VisualState.Setters>
+                <VisualState.StateTriggers>
+                    <OrientationStateTrigger Orientation="Portrait"/>
+                </VisualState.StateTriggers>
+            </VisualState>
+
+            <VisualState x:Name="Landscape">
+                <VisualState.Setters>
+                    <Setter TargetName="PortraitLayout" Property="IsVisible" Value="False"/>
+                    <Setter TargetName="ControlsLayout" Property="IsVisible" Value="False"/>
+                    <Setter TargetName="LandscapeLayout" Property="IsVisible" Value="True"/>
+                    <Setter TargetName="TitleLabel" Property="IsVisible" Value="False"/>
+                </VisualState.Setters>
+                <VisualState.StateTriggers>
+                    <OrientationStateTrigger Orientation="Landscape"/>
+                </VisualState.StateTriggers>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
     <Grid x:Name="MainGrid" RowDefinitions="Auto,*,Auto" Padding="20">
 
         <!-- Title -->
@@ -15,7 +42,7 @@
                Style="{DynamicResource TitleLabelStyle}"
                HorizontalOptions="Center" />
 
-        <!-- Portrait CollectionView -->
+        <!-- Portrait Layout -->
         <CollectionView x:Name="PortraitLayout"
                         Grid.Row="1"
                         ItemsLayout="VerticalGrid, 2"
@@ -78,7 +105,7 @@
         </Grid>
 
         <!-- Landscape Layout -->
-        <Grid x:Name="LandscapeLayout" VerticalOptions="Center" IsVisible="False">
+        <Grid x:Name="LandscapeLayout" VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
