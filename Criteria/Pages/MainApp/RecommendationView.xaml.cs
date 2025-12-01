@@ -15,16 +15,8 @@ public partial class RecommendationView : ContentPage
         InitializeComponent();
         _recommendedMovies = recommendedMovies ?? new List<Movie>();
 
-        RecommendationsCarousel.ItemsSource = _recommendedMovies;
+        PortraitCarousel.ItemsSource = _recommendedMovies;
         LandscapeCarousel.ItemsSource = _recommendedMovies;
-
-        RecommendationsCarousel.PositionChanged += (s, e) =>
-        {
-            if (RecommendationsCarousel.CurrentItem is Movie movie)
-            {
-                LandscapeSynopsis.Text = movie.Overview;
-            }
-        };
     }
 
     private async void OnPosterTapped(object sender, TappedEventArgs e)
@@ -64,7 +56,7 @@ public partial class RecommendationView : ContentPage
         {
             currentMovie = landscapeMovie;
         }
-        else if (RecommendationsCarousel.CurrentItem is Movie portraitMovie)
+        else if (PortraitCarousel.CurrentItem is Movie portraitMovie)
         {
             currentMovie = portraitMovie;
         }
@@ -92,31 +84,6 @@ public partial class RecommendationView : ContentPage
     private async void OnSavedFilmsClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new SavedFilms());
-    }
-
-    private void RecommendationView_SizeChanged(object sender, EventArgs e)
-    {
-        if (Width > Height)
-        {
-            AppTitle.IsVisible = false;
-            InstructionsStack.IsVisible = false;
-            FooterGrid.IsVisible = false;
-            RecommendationsCarousel.IsVisible = false;
-
-            LandscapeGrid.IsVisible = true;
-
-            if (LandscapeCarousel.CurrentItem is Movie currentMovie)
-                LandscapeSynopsis.Text = currentMovie.Overview;
-        }
-        else
-        {
-            AppTitle.IsVisible = true;
-            InstructionsStack.IsVisible = true;
-            FooterGrid.IsVisible = true;
-            RecommendationsCarousel.IsVisible = true;
-
-            LandscapeGrid.IsVisible = false;
-        }
     }
 
     private void LandscapeCarousel_PositionChanged(object sender, PositionChangedEventArgs e)

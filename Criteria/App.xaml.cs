@@ -37,5 +37,18 @@ namespace Criteria
                 MainPage = new NavigationPage(new Pages.FirstBoot.GenreSelectionPage());
             }
         }
+
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            var window = base.CreateWindow(activationState);
+
+            window.MinimumHeight = 900;
+            window.MinimumWidth = 600;
+
+            window.MaximumWidth = 650;
+            window.MaximumHeight = 1000;
+
+            return window;
+        }
     }
 }

@@ -1,12 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Criteria.Pages.MainApp.RecommendationView"
-             Style="{DynamicResource PageStyle}"
-             SizeChanged="RecommendationView_SizeChanged">
-
+             Style="{DynamicResource PageStyle}">
+    
     <Grid x:Name="MainGrid" RowDefinitions="Auto,Auto,*,Auto" Padding="20">
-
-        <!-- Title -->
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter TargetName="AppTitle" Property="IsVisible" Value="True" />
+                        <Setter TargetName="InstructionsStack" Property="IsVisible" Value="True" />
+                        <Setter TargetName="PortraitCarousel" Property="IsVisible" Value="True" />
+                        <Setter TargetName="FooterGrid" Property="IsVisible" Value="True" />
+                        <Setter TargetName="LandscapeGrid" Property="IsVisible" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+                
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter TargetName="AppTitle" Property="IsVisible" Value="False" />
+                        <Setter TargetName="InstructionsStack" Property="IsVisible" Value="False" />
+                        <Setter TargetName="PortraitCarousel" Property="IsVisible" Value="False" />
+                        <Setter TargetName="FooterGrid" Property="IsVisible" Value="False" />
+                        <Setter TargetName="LandscapeGrid" Property="IsVisible" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Label x:Name="AppTitle"
                Grid.Row="0"
                Text="Criteria."
@@ -16,8 +47,7 @@
                Style="{DynamicResource TitleLabelStyle}"
                HorizontalOptions="Center"
                Margin="0,10,0,20"/>
-
-        <!-- Instructions -->
+        
         <VerticalStackLayout x:Name="InstructionsStack"
                              Grid.Row="1" Spacing="5" HorizontalOptions="Center">
             <Label Text="Swipe left or right to navigate"
@@ -29,22 +59,18 @@
                    Style="{DynamicResource InstructionLabelStyle}"
                    HorizontalOptions="Center"/>
         </VerticalStackLayout>
-
-        <!-- Main content -->
+        
         <Grid x:Name="ContentGrid" Grid.Row="2">
-
-            <!-- Portrait Carousel -->
-            <CarouselView x:Name="RecommendationsCarousel"
+            
+            <CarouselView x:Name="PortraitCarousel"
                           IndicatorView="carouselIndicators"
                           HorizontalOptions="Fill"
                           VerticalOptions="Fill"
                           Margin="0,10,0,10">
-
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="450" WidthRequest="300">
-
-                            <!-- Poster Image -->
+                            
                             <Image Source="{Binding PosterPath}"
                                    Aspect="AspectFit"
                                    HorizontalOptions="Fill"
@@ -53,8 +79,7 @@
                                     <TapGestureRecognizer Tapped="OnPosterTapped"/>
                                 </Image.GestureRecognizers>
                             </Image>
-
-                            <!-- Overlay (Portrait only) -->
+                            
                             <Grid x:Name="Overlay"
                                   BackgroundColor="{DynamicResource OverlayBackgroundColor}"
                                   IsVisible="False"
@@ -70,8 +95,7 @@
                                            LineBreakMode="WordWrap"/>
                                 </ScrollView>
                             </Grid>
-
-                            <!-- Movie Title at Bottom -->
+                            
                             <Label Text="{Binding Title}"
                                    FontSize="22"
                                    FontAttributes="Bold"
@@ -84,11 +108,9 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-
-            <!-- Landscape Layout -->
-            <Grid x:Name="LandscapeGrid" IsVisible="False" ColumnDefinitions="*,*" RowDefinitions="*">
-
-                <!-- Left: Poster -->
+            
+            <Grid x:Name="LandscapeGrid" ColumnDefinitions="*,*" RowDefinitions="*">
+                
                 <CarouselView x:Name="LandscapeCarousel"
                               ItemsSource="{Binding _recommendedMovies}"
                               HorizontalOptions="Fill"
@@ -100,8 +122,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-
-                <!-- Right: Synopsis + Save -->
+                
                 <Grid Grid.Column="1" Padding="10" RowDefinitions="*, Auto">
                     <ScrollView Grid.Row="0" HeightRequest="180">
                         <Label x:Name="LandscapeSynopsis"
@@ -121,8 +142,7 @@
                             Clicked="OnSaveButtonClicked"/>
                 </Grid>
             </Grid>
-
-            <!-- Indicator Dots -->
+            
             <IndicatorView x:Name="carouselIndicators"
                            HorizontalOptions="Center"
                            VerticalOptions="End"
@@ -130,15 +150,12 @@
                            SelectedIndicatorColor="{DynamicResource SelectedIndicatorColor}"
                            Margin="0,0,0,0"/>
         </Grid>
-
-        <!-- Footer Buttons -->
+        
         <Grid x:Name="FooterGrid"
               Grid.Row="3"
               ColumnDefinitions="Auto,*,Auto"
               Margin="0,20,0,0"
               VerticalOptions="End">
-
-            <!-- Saved Films -->
             <ImageButton x:Name="SavedFilmsButton"
                          Grid.Column="0"
                          Source="bookmark.png"
@@ -146,8 +163,7 @@
                          HeightRequest="60"
                          HorizontalOptions="Start"
                          Clicked="OnSavedFilmsClicked"/>
-
-            <!-- Save Button -->
+            
             <Button x:Name="SaveButton"
                     Grid.Column="1"
                     Text="Save"
@@ -159,8 +175,7 @@
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     Clicked="OnSaveButtonClicked"/>
-
-            <!-- Home -->
+            
             <ImageButton x:Name="HomeButton"
                          Grid.Column="2"
                          Source="home.png"
