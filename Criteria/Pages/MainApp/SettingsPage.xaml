@@ -28,6 +28,25 @@
                     WidthRequest="200"
                     HeightRequest="50"
                     Clicked="OnResetPreferencesClicked"/>
+
+            <Grid WidthRequest="200" HeightRequest="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Dark Mode"
+               VerticalOptions="Center"
+               Style="{DynamicResource TitleLabelStyle}" />
+
+                <Switch x:Name="DarkModeSwitch"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                IsToggled="{Binding IsDarkModeEnabled}"
+                Toggled="OnDarkModeToggled"/>
+            </Grid>
+
         </VerticalStackLayout>
 
         <!-- Home Button -->

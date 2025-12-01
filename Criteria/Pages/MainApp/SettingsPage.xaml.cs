@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using Microsoft.Maui.Storage;
 using Criteria.Utilities;
+using Criteria.Themes;
 
 namespace Criteria.Pages.MainApp
 {
@@ -40,5 +41,20 @@ namespace Criteria.Pages.MainApp
         {
             Application.Current.MainPage = new NavigationPage(new Pages.MainApp.MainPage());
         }
+
+        private async void OnDarkModeToggled(object sender, ToggledEventArgs e)
+        {
+            Application.Current.Resources.MergedDictionaries.Clear();
+
+            if (e.Value)
+            {
+                Application.Current.Resources.MergedDictionaries.Add(new DarkTheme());
+            }
+            else
+            {
+                Application.Current.Resources.MergedDictionaries.Add(new LightTheme());
+            }
+        }
+
     }
 }
