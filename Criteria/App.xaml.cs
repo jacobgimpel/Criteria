@@ -1,5 +1,6 @@
 ﻿using Criteria.Models;
 using Criteria.Services;
+using Criteria.Utilities;
 using Criteria.Pages.MainApp;
 using System.IO;
 
@@ -26,7 +27,7 @@ namespace Criteria
         {
             InitializeComponent();
 
-            bool firstBootDone = Preferences.Get("SetPreferences.SelectionsCompleted", false);
+            bool firstBootDone = Preferences.Get(SetPreferences.SelectionsCompleted, false);
             if (firstBootDone)
             {
                 MainPage = new NavigationPage(new Pages.MainApp.MainPage());
